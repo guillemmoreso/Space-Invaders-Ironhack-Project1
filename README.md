@@ -47,10 +47,16 @@ Classes:
 
 Definition of the different states and their transition (transition functions)
 
-- splashScreen
-- gameScreen
-- gameoverScreen
-- winScreen - TBD
+- Home page: Two entries
+  Play game
+  Instructions
+- Game Screen: Game + Scoreboard
+  Scoreboard
+- Game over Screen: Two entries
+  Restart game
+  Scoreboard
+- Win Screen: Highlighted Scoreboard
+  Scoreboard
 
 ## Task
 
