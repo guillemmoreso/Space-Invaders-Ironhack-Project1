@@ -60,15 +60,15 @@ Task definition in order of priority
 
 ### Trello
 
-[https://trello.com/b/oavWAzW1/module-1-space-invaders-gm](https://trello.com)
+https://trello.com/b/oavWAzW1/module-1-space-invaders-gm
 
 ### Git
 
 URls for the project repo and deploy
-[Link Repo](http://github.com)
-[Link Deploy](http://github.com)
+[Link Repo] https://github.com/guillemmoreso/Space-Invaders-Ironhack-Project1
+[Link Deploy] https://guillemmoreso.github.io/Space-Invaders-Ironhack-Project1/
 
 ### Slides
 
 URls for the project presentation (slides)
-[https://slides.com/guillemmoreso](http://slides.com)
+https://slides.com/guillemmoreso
