@@ -3,8 +3,11 @@ class Bullet {
   constructor(game) {
     this.gameWidth = game.gameWidth;
     this.gameHeight = game.gameHeight;
-    this.position = { x: 0, y: 0 };
-    this.speed = { x: 0, y: 4 };
+    this.position = {
+      x: game.gameWidth / 2,
+      y: game.gameHeight
+    };
+    this.speed = { x: 0, y: -4 };
     this.size = 16;
   }
   draw(ctx) {

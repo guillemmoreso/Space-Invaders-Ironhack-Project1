@@ -3,7 +3,10 @@ class Enemies {
   constructor(game) {
     this.gameWidth = game.gameWidth;
     this.gameHeight = game.gameHeight;
-    this.position = { x: 50, y: 50 };
+    this.position = {
+      x: game.gameWidth / 2 - 15,
+      y: 150
+    };
     this.size = 50;
   }
   draw(ctx) {
