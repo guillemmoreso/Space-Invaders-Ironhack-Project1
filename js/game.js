@@ -7,7 +7,7 @@ class Game {
   start() {
     this.spaceship = new Spaceship(this);
     this.bullet = new Bullet(this);
-    //spaceship.draw(ctx);
+    this.enemy = new Enemies(this);
 
     new InputHandler(this.spaceship);
   }
@@ -18,5 +18,6 @@ class Game {
   draw(ctx) {
     this.spaceship.draw(ctx);
     this.bullet.draw(ctx);
+    this.enemy.draw(ctx);
   }
 }

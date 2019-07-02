@@ -4,7 +4,7 @@ let ctx = canvas.getContext("2d");
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
-let game = new Game(GAME_WIDTH, GAME_HEIGHT);
+let game = new Game(GAME_WIDTH, GAME_HEIGHT); // Starts the new Game instantiating the Game Object
 game.start();
 
 let lastTime = 0;
@@ -17,6 +17,7 @@ function gameLoop(timeStamp) {
 
   game.update(deltaTime);
   game.draw(ctx);
+
   /*spaceship.update(deltaTime);
   spaceship.draw(ctx); // Redraws the spaceship
 

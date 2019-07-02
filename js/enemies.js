@@ -1,17 +1,13 @@
 "use strict";
-class Bullet {
+class Enemies {
   constructor(game) {
     this.gameWidth = game.gameWidth;
     this.gameHeight = game.gameHeight;
-    this.position = { x: 0, y: 0 };
-    this.speed = { x: 0, y: 4 };
-    this.size = 16;
+    this.position = { x: 50, y: 50 };
+    this.size = 50;
   }
   draw(ctx) {
     ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
   }
-  update() {
-    this.position.x += this.speed.x;
-    this.position.y += this.speed.y;
-  }
+  update() {}
 }
