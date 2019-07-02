@@ -1,20 +1,17 @@
 "use strict";
 class Bullet {
-  constructor(game) {
-    this.gameWidth = game.gameWidth;
-    this.gameHeight = game.gameHeight;
-    this.position = {
-      x: game.gameWidth / 2,
-      y: game.gameHeight
-    };
+  constructor(width, height, x, y) {
+    this.width = width;
+    this.height = height;
+    this.positionX = x;
+    this.positionY = y;
     this.speed = { x: 0, y: -4 };
-    this.size = 16;
   }
   draw(ctx) {
-    ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
+    ctx.fillRect(this.width, this.height, this.positionX, this.positionY);
   }
   update() {
-    this.position.x += this.speed.x;
-    this.position.y += this.speed.y;
+    this.positionX += this.speed.x;
+    this.positionY += this.speed.y;
   }
 }

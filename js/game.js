@@ -7,7 +7,7 @@ class Game {
   start() {
     this.spaceship = new Spaceship(this);
     this.bullet = new Bullet(this);
-    this.enemy = new Enemies(this);
+    this.enemy = new Enemy(this);
 
     new InputHandler(this.spaceship);
   }

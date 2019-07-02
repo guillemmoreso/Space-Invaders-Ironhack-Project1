@@ -1,5 +1,5 @@
 "use strict";
-class Enemies {
+class Enemy {
   constructor(game) {
     this.gameWidth = game.gameWidth;
     this.gameHeight = game.gameHeight;
