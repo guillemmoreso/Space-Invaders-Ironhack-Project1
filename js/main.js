@@ -4,17 +4,26 @@ let ctx = canvas.getContext("2d");
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
+let game = new Game(GAME_WIDTH, GAME_HEIGHT);
+game.start();
+
 let lastTime = 0;
 
-function gameLoop() {
+function gameLoop(timeStamp) {
+  let deltaTime = timeStamp - lastTime;
+  lastTime = timeStamp;
+
   ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT); //Clear Everytime sth gets updated
-  spaceship.update();
+
+  game.update(deltaTime);
+  game.draw(ctx);
+  /*spaceship.update(deltaTime);
   spaceship.draw(ctx); // Redraws the spaceship
 
-  bullet.update();
-  bullet.draw(ctx);
+  bullet.update(deltaTime);
+  bullet.draw(ctx);*/
 
   requestAnimationFrame(gameLoop); //When the next game is ready call this loop again
 }
 
-gameLoop(); //Also we can call it this way: requestAnimationFrame(gameLoop);
+requestAnimationFrame(gameLoop);

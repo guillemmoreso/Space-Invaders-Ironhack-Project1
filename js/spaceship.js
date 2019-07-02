@@ -1,7 +1,7 @@
 "use strict";
 class Spaceship {
-  constructor(gameWidth, gameHeight) {
-    this.gameWidth = gameWidth;
+  constructor(game) {
+    this.gameWidth = game.gameWidth;
     this.width = 100;
     this.height = 40;
 
@@ -9,8 +9,8 @@ class Spaceship {
     this.speed = 0;
 
     this.position = {
-      x: gameWidth / 2 - this.width / 2, //center Spaceship in the Screen
-      y: gameHeight - this.height
+      x: game.gameWidth / 2 - this.width / 2, //center Spaceship in the Screen
+      y: game.gameHeight - this.height
     };
   }
   moveLeft() {
