@@ -1,20 +1,26 @@
 "use strict";
 class Bullet {
-  constructor(x, y, dir, color) {
-    this.width = 3;
-    this.height = 15;
+  constructor(x, y, width, height, timelife) {
+    this.width = width;
+    this.height = height;
     this.x = x - this.width / 2;
     this.y = y;
-    this.direction = dir;
-    this.bulletColor = color;
-
+    this.timelife = timelife;
+    this.movementId = setInterval(() => {
+      this.y = this.y - 1;
+    }, 100);
+    this.timeId = setTimeout(() => {
+      clearInterval(this.movementId);
+      game.bullets.shift();
+    }, this.timelife);
     this.speed = 5;
   }
   draw(ctx) {
+    ctx.fillStyle = "black";
     ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = this.bulletColor;
   }
   update() {
-    this.y = this.y - this.speed * this.direction;
+    this.y = this.y - 1;
+    console.log(this.y);
   }
 }

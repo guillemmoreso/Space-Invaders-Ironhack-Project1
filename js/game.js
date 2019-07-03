@@ -3,31 +3,28 @@ class Game {
   constructor(gameWidth, gameHeight) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    //this.bullet = bullet;
+    this.bullets = [];
   }
   start() {
     this.spaceship = new Spaceship(this);
-    // this.bullet = new Bullet(this);
     this.enemy = new Enemy(this);
+
     this.inputHandler();
   }
-  update(deltaTime) {
-    this.spaceship.update(deltaTime);
-    this.spaceship.bullets.forEach((element, index) => {
-      if (element.y < 0) {
-        this.spaceship.bullets.splice(index, 1);
-      }
-      element.update(deltaTime);
-    });
-    //this.bullet.update(deltaTime); //FUNCION IF PARA QUE NO SEA UNDIFINED I QUE EL BULLET DE ADALT SIGUI UN ARRAY
+  update() {
+    this.spaceship.update();
+    /*if (this.bullets.length > 0)
+      this.bullets.forEach(bullet => {
+        bullet.update();
+      }); */ //FUNCION IF PARA QUE NO SEA UNDIFINED I QUE EL BULLET DE ADALT SIGUI UN ARRAY
   }
   draw(ctx) {
     this.spaceship.draw(ctx);
-    this.spaceship.bullets.forEach(element => {
-      element.draw(ctx);
-    });
-    //this.bullet.draw(ctx);
     this.enemy.draw(ctx);
+    //console.log(this.bullets);
+    this.bullets.forEach(bullet => {
+      bullet.draw(ctx);
+    });
   }
   inputHandler() {
     document.addEventListener("keydown", event => {
@@ -59,16 +56,11 @@ class Game {
     document.addEventListener("keyup", event => {
       if (event.keyCode === 32) {
         console.log("pam");
-
-        this.spaceship.bullets.push(
-          new Bullet(
-            this.spaceship.x + this.spaceship.width / 2,
-            this.spaceship.y,
-            1,
-            "red"
-          )
-        );
+        this.attack();
       }
     });
+  }
+  attack() {
+    this.bullets.push(new Bullet(10, 10, 2, 2, 3));
   }
 }
