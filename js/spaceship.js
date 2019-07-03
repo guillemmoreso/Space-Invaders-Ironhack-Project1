@@ -5,6 +5,8 @@ class Spaceship {
     this.width = 100;
     this.height = 40;
 
+    this.bullets = []; //NV
+
     this.maxSpeed = 10;
     this.speed = 0;
 
@@ -14,7 +16,6 @@ class Spaceship {
     };
   }
   moveLeft() {
-    console.log("wola");
     this.speed = -this.maxSpeed;
   }
   moveRight() {
@@ -34,9 +35,5 @@ class Spaceship {
     if (this.position.x + this.width > this.gameWidth) {
       this.position.x = this.gameWidth - this.width;
     } //Avoid getting out the box on the right side
-  }
-  attack() {
-    console.log("disparo");
-    return new Bullet(100, 100, 500, 500);
   }
 }

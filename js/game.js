@@ -13,10 +13,19 @@ class Game {
   }
   update(deltaTime) {
     this.spaceship.update(deltaTime);
+    this.spaceship.bullets.forEach((element, index) => {
+      if (element.y < 0) {
+        this.spaceship.bullets.splice(index, 1);
+      }
+      element.update(deltaTime);
+    });
     //this.bullet.update(deltaTime); //FUNCION IF PARA QUE NO SEA UNDIFINED I QUE EL BULLET DE ADALT SIGUI UN ARRAY
   }
   draw(ctx) {
     this.spaceship.draw(ctx);
+    this.spaceship.bullets.forEach(element => {
+      element.draw(ctx);
+    });
     //this.bullet.draw(ctx);
     this.enemy.draw(ctx);
   }
@@ -48,10 +57,17 @@ class Game {
       }
     });
     document.addEventListener("keyup", event => {
-      switch (event.keyCode) {
-        case 32:
-          this.bullet = this.spaceship.attack();
-          break;
+      if (event.keyCode === 32) {
+        console.log("pam");
+
+        this.spaceship.bullets.push(
+          new Bullet(
+            this.spaceship.x + this.spaceship.width / 2,
+            this.spaceship.y,
+            1,
+            "red"
+          )
+        );
       }
     });
   }
