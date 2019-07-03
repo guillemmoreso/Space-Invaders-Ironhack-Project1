@@ -1,9 +1,10 @@
 "use strict";
 class Game {
-  constructor(gameWidth, gameHeight) {
+  constructor(ctx, gameWidth, gameHeight) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.bullets = [];
+    this.ctx = ctx;
   }
   start() {
     this.spaceship = new Spaceship(this);
