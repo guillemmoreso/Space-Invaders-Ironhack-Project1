@@ -27,10 +27,11 @@ class InputHandler {
           break;
       }
     });
-    document.addEventListener("spacebar", event => {
+    document.addEventListener("keyup", event => {
       switch (event.keyCode) {
         case 32:
           spaceship.attack();
+          break;
       }
     });
   }

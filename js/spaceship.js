@@ -14,6 +14,7 @@ class Spaceship {
     };
   }
   moveLeft() {
+    console.log("wola");
     this.speed = -this.maxSpeed;
   }
   moveRight() {
@@ -35,6 +36,7 @@ class Spaceship {
     } //Avoid getting out the box on the right side
   }
   attack() {
-    let bulletShoot = new Bullet(10, 10, this.position.x, this.position.y);
+    console.log("disparo");
+    return new Bullet(100, 100, 500, 500);
   }
 }
