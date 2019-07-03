@@ -6,12 +6,14 @@ class Game {
     this.bullets = [];
     this.ctx = ctx;
   }
+
   start() {
     this.spaceship = new Spaceship(this);
     this.enemy = new Enemy(this);
 
     this.inputHandler();
   }
+
   update() {
     this.spaceship.update();
     /*if (this.bullets.length > 0)
@@ -19,6 +21,7 @@ class Game {
         bullet.update();
       }); */ //FUNCION IF PARA QUE NO SEA UNDIFINED I QUE EL BULLET DE ADALT SIGUI UN ARRAY
   }
+
   draw(ctx) {
     this.spaceship.draw(ctx);
     this.enemy.draw(ctx);
@@ -27,6 +30,7 @@ class Game {
       bullet.draw(ctx);
     });
   }
+
   inputHandler() {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
@@ -61,6 +65,7 @@ class Game {
       }
     });
   }
+
   attack() {
     this.bullets.push(new Bullet(10, 10, 2, 2, 3));
   }

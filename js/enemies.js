@@ -9,8 +9,10 @@ class Enemy {
     };
     this.size = 50;
   }
+
   draw(ctx) {
     ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
   }
+
   update() {}
 }

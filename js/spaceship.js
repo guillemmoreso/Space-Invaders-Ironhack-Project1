@@ -15,18 +15,23 @@ class Spaceship {
       y: game.gameHeight - this.height
     };
   }
+
   moveLeft() {
     this.speed = -this.maxSpeed;
   }
+
   moveRight() {
     this.speed = this.maxSpeed;
   }
+
   stop() {
     this.speed = 0;
   }
+
   draw(ctx) {
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
+  
   update() {
     this.position.x += this.speed;
     if (this.position.x < 0) {
