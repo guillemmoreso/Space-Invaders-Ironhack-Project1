@@ -3,7 +3,6 @@ class Game {
   constructor(ctx, gameWidth, gameHeight) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.bullets = [];
     this.ctx = ctx;
   }
 
@@ -26,7 +25,7 @@ class Game {
     this.spaceship.draw(ctx);
     this.enemy.draw(ctx);
     //console.log(this.bullets);
-    this.bullets.forEach(bullet => {
+    this.spaceship.bullets.forEach(bullet => {
       bullet.draw(ctx);
     });
   }
@@ -61,12 +60,8 @@ class Game {
     document.addEventListener("keyup", event => {
       if (event.keyCode === 32) {
         console.log("pam");
-        this.attack();
+        this.spaceship.attack();
       }
     });
-  }
-
-  attack() {
-    this.bullets.push(new Bullet(10, 10, 2, 2, 3));
   }
 }

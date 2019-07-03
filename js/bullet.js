@@ -1,6 +1,6 @@
 "use strict";
 class Bullet {
-  constructor(x, y, width, height, timelife) {
+  constructor(x, y, width, height) {
     this.width = width;
     this.height = height;
     this.x = x - this.width / 2;
@@ -21,7 +21,7 @@ class Bullet {
     ctx.fillStyle = "black";
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
-  
+
   update() {
     this.y = this.y - 1;
     console.log(this.y);
