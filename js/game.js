@@ -24,9 +24,9 @@ class Game {
   draw(ctx) {
     this.spaceship.draw(ctx);
     this.enemy.draw(ctx);
-    //console.log(this.bullets);
     this.spaceship.bullets.forEach(bullet => {
       bullet.draw(ctx);
+      bullet.update();
     });
   }
 
