@@ -48,6 +48,8 @@ class Spaceship {
     } //Avoid getting out the box on the right side
   }
   attack() {
-    this.bullets.push(new Bullet(10, 10, 2, 2));
+    this.bullets.push(
+      new Bullet(this.position.x + this.width / 2, this.position.y, 2, 20)
+    );
   }
 }
