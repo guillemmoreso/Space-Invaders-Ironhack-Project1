@@ -3,28 +3,31 @@ class Game {
   constructor(ctx, gameWidth, gameHeight) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
+    this.enemies = [];
     this.ctx = ctx;
   }
 
   start() {
     this.spaceship = new Spaceship(this);
-    this.enemy = new Enemy(this);
-
+    this._createEnemies();
     this._inputHandler();
   }
 
   update() {
+    this._drawEnemies();
     this.spaceship.update();
-    /*if (this.bullets.length > 0)
-      this.bullets.forEach(bullet => {
-        bullet.update();
-      }); */ //FUNCION IF PARA QUE NO SEA UNDIFINED I QUE EL BULLET DE ADALT SIGUI UN ARRAY
   }
 
   draw() {
     this.spaceship.draw();
-    this.enemy.draw();
     this._drawBullet();
+  }
+
+  _drawEnemies() {
+    this.enemies.map(enemy => {
+      enemy.x++;
+      this.ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+    });
   }
 
   _drawBullet() {
@@ -32,6 +35,16 @@ class Game {
       bullet.draw();
       bullet.update();
     });
+  }
+
+  _createEnemies() {
+    // this.enemies = [];
+    console.log(this.enemies);
+    for (let i = 0; i < 30; i++) {
+      let x = 20 + (i % 8) * 30;
+      let y = 20 + (i % 3) * 30;
+      this.enemies.push(new Enemy(x, y, 5, 5));
+    }
   }
 
   _inputHandler() {
@@ -63,7 +76,6 @@ class Game {
     });
     document.addEventListener("keyup", event => {
       if (event.keyCode === 32) {
-        console.log("pam");
         this.spaceship.attack();
       }
     });

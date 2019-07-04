@@ -51,5 +51,5 @@ class Spaceship {
     this.bullets.push(
       new Bullet(this.position.x + this.width / 2, this.position.y, 2, 20)
     );
-  }
+  } //Cuando tenga la Y hacer un slice con un foreach
 }
