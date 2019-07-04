@@ -8,10 +8,11 @@ class Enemy {
       y: 150
     };
     this.size = 50;
+    this.ctx = ctx;
   }
 
-  draw(ctx) {
-    ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
+  draw() {
+    this.ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
   }
 
   update() {}

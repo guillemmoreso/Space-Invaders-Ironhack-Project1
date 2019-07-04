@@ -21,11 +21,15 @@ class Game {
       }); */ //FUNCION IF PARA QUE NO SEA UNDIFINED I QUE EL BULLET DE ADALT SIGUI UN ARRAY
   }
 
-  draw(ctx) {
-    this.spaceship.draw(ctx);
-    this.enemy.draw(ctx);
+  draw() {
+    this.spaceship.draw();
+    this.enemy.draw();
+    this.drawBullet();
+  }
+
+  drawBullet() {
     this.spaceship.bullets.forEach(bullet => {
-      bullet.draw(ctx);
+      bullet.draw();
       bullet.update();
     });
   }

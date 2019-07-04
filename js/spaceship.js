@@ -4,6 +4,7 @@ class Spaceship {
     this.gameWidth = game.gameWidth;
     this.width = 100;
     this.height = 40;
+    this.ctx = ctx;
 
     this.bullets = []; //NV
 
@@ -28,8 +29,13 @@ class Spaceship {
     this.speed = 0;
   }
 
-  draw(ctx) {
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+  draw() {
+    this.ctx.fillRect(
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
   }
 
   update() {
