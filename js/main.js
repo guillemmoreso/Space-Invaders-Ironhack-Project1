@@ -9,14 +9,11 @@ game.start();
 
 let lastTime = 0;
 
-function gameLoop(timeStamp) {
-  let deltaTime = timeStamp - lastTime;
-  lastTime = timeStamp;
-
+function gameLoop() {
   ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT); //Clear Everytime sth gets updated
 
-  game.update(deltaTime);
-  game.draw(ctx);
+  game.update();
+  game.draw();
 
   /*spaceship.update(deltaTime);
   spaceship.draw(ctx); // Redraws the spaceship

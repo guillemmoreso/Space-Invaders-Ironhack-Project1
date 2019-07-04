@@ -19,11 +19,11 @@ class Bullet {
   }
 
   draw() {
-    this.ctx.fillStyle = "black";
+    //this.ctx.fillStyle = "green";
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
   update() {
-    this.y = this.y - 1;
+    this.y = this.y - 8;
   }
 }

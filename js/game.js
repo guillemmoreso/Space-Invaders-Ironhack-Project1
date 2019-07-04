@@ -10,7 +10,7 @@ class Game {
     this.spaceship = new Spaceship(this);
     this.enemy = new Enemy(this);
 
-    this.inputHandler();
+    this._inputHandler();
   }
 
   update() {
@@ -24,17 +24,17 @@ class Game {
   draw() {
     this.spaceship.draw();
     this.enemy.draw();
-    this.drawBullet();
+    this._drawBullet();
   }
 
-  drawBullet() {
+  _drawBullet() {
     this.spaceship.bullets.forEach(bullet => {
       bullet.draw();
       bullet.update();
     });
   }
 
-  inputHandler() {
+  _inputHandler() {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
         case 37:
