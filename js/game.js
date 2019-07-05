@@ -14,18 +14,27 @@ class Game {
   }
 
   update() {
-    this._drawEnemies();
     this.spaceship.update();
   }
 
   draw() {
     this.spaceship.draw();
     this._drawBullet();
+    this._drawEnemies();
   }
 
   _drawEnemies() {
     this.enemies.map(enemy => {
-      enemy.x++;
+      let edge = true;
+      if (enemy.x > this.gameWidth || enemy.x < 0) {
+        edge = true;
+      }
+      if (edge) {
+        enemy.shiftDown();
+      }
+      if (!edge) {
+        enemy.x++;
+      }
       this.ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
     });
   }
