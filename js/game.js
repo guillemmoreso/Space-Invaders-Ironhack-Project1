@@ -38,12 +38,10 @@ class Game {
   }
 
   _createEnemies() {
-    // this.enemies = [];
-    console.log(this.enemies);
     for (let i = 0; i < 30; i++) {
-      let x = 20 + (i % 8) * 30;
-      let y = 20 + (i % 3) * 30;
-      this.enemies.push(new Enemy(x, y, 5, 5));
+      let x = 20 + (i % 8) * 60;
+      let y = 20 + (i % 3) * 60;
+      this.enemies.push(new Enemy(x, y, 20, 20));
     }
   }
 
@@ -81,3 +79,25 @@ class Game {
     });
   }
 }
+//Copiar aixo del Snake
+// la funcion de abajo sabe cuando tiene que volver a llamar la funcion que se pasa por parametro;
+/*if (this.intervalGame !== undefined) {
+  window.requestAnimationFrame(this._update.bind(this));
+}
+  }
+
+pause() {
+  if (this.intervalGame) {
+    window.cancelAnimationFrame(this.intervalGame);
+    this.intervalGame = undefined;
+  }
+}
+
+start() {
+  // bucle infinito que se encarga de pintar el canvas
+  this._assignControlsToKeys();
+  this._generateFood();
+  this.snake.move();
+  this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+}
+}*/
