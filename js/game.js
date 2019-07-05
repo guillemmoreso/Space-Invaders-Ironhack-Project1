@@ -25,16 +25,7 @@ class Game {
 
   _drawEnemies() {
     this.enemies.map(enemy => {
-      let edge = true;
-      if (enemy.x > this.gameWidth || enemy.x < 0) {
-        edge = true;
-      }
-      if (edge) {
-        enemy.shiftDown();
-      }
-      if (!edge) {
-        enemy.x++;
-      }
+      enemy.move();
       this.ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
     });
   }
