@@ -8,22 +8,33 @@ class Enemy {
     this.height = height;
     this.ctx = ctx;
 
-    this.xdir = 1;
+    this.xVelocidad = 3;
+    this.yVelocidad = 3;
   }
-  draw() {}
+  draw() {
+    // this.ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+  }
   shiftDown() {
-    this.y += 1;
-    if (this.y === this.y) {
-      this.x = 30;
-      this.y = 30;
+    this.y += this.yVelocidad;
+    if (this.y === 500) {
+      this.yVelocidad = 0;
+      this.moveLeft();
     }
   }
-  move() {
-    console.log(this.x);
-    if (this.x > 500) {
+  moveRight() {
+    this.x += this.xVelocidad;
+    console.log(game.gameWidth);
+    // if (this.x === 500) {
+    //   this.xVelocidad = 0;
+    //   this.shiftDown();
+    // }
+  }
+  moveLeft() {
+    this.x -= this.xVelocidad;
+    console.log(this.xVelocidad);
+    if (this.x === 100) {
+      this.xVelocidad = 0;
       this.shiftDown();
-    } else {
-      this.x = this.x + this.xdir;
     }
   }
 

@@ -24,11 +24,36 @@ class Game {
   }
 
   _drawEnemies() {
-    this.enemies.map(enemy => {
-      enemy.move();
+    this.enemies.forEach(enemy => {
+      console.log(enemy);
+      enemy.x++;
       this.ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+      // if (enemy.x < 500 && jump === 0) {
+      //   enemy.moveRight();
+      // } else {
+      //   jump++;
+      //   enemy.shiftDown();
+      //   // moveLeft()
+      // }
     });
   }
+
+  // _drawEnemies() {
+  //   var edge = false;
+  //   for (var i = 0; i < this.enemies.length; i++) {
+  //     this.enemies[i].enemy.move();
+  //     console.log(this.enemies[i].enemy.move());
+  //     if (this.enemies[i].x > this.gameWidth || this.enemies[i].x < 0) {
+  //       edge = true;
+  //     }
+  //   }
+
+  //   if (edge) {
+  //     for (var i = 0; i < this.enemies.length; i++) {
+  //       this.enemies[i].shiftDown();
+  //     }
+  //   }
+  // }
 
   _drawBullet() {
     this.spaceship.bullets.forEach(bullet => {
