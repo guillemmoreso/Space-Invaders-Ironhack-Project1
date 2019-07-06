@@ -33,10 +33,10 @@ class Enemy {
   }
   moveLeft() {
     this.x -= this.xVelocidad;
-    if (this.x === 100) {
-      this.xVelocidad = 0;
-      //this.shiftDown();
-    }
+    // if (this.x === 100) {
+    //   this.xVelocidad = 0;
+    //   //this.shiftDown();
+    // }
   }
 
   update() {}

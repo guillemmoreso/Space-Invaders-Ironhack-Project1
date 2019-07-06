@@ -32,9 +32,9 @@ class Game {
         enemy.moveLeft();
       }
 
-      if (enemy.x > 790 || enemy.x < 0) {
+      if (enemy.x > 750 || enemy.x < 0) {
         this.enemies.forEach(enemyY => {
-          enemyY.y += 10;
+          enemyY.y += 100;
           enemyY.direction = !enemyY.direction;
         });
       }
