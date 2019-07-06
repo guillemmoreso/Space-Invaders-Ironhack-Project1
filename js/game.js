@@ -25,16 +25,19 @@ class Game {
 
   _drawEnemies() {
     this.enemies.forEach(enemy => {
-      console.log(enemy);
-      enemy.x++;
       this.ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
-      // if (enemy.x < 500 && jump === 0) {
-      //   enemy.moveRight();
-      // } else {
-      //   jump++;
-      //   enemy.shiftDown();
-      //   // moveLeft()
-      // }
+      if (enemy.direction) {
+        enemy.moveRight();
+      } else {
+        enemy.moveLeft();
+      }
+
+      if (enemy.x > 790 || enemy.x < 0) {
+        this.enemies.forEach(enemyY => {
+          enemyY.y += 10;
+          enemyY.direction = !enemyY.direction;
+        });
+      }
     });
   }
 

@@ -8,6 +8,8 @@ class Enemy {
     this.height = height;
     this.ctx = ctx;
 
+    this.direction = true;
+
     this.xVelocidad = 3;
     this.yVelocidad = 3;
   }
@@ -31,10 +33,9 @@ class Enemy {
   }
   moveLeft() {
     this.x -= this.xVelocidad;
-    console.log(this.xVelocidad);
     if (this.x === 100) {
       this.xVelocidad = 0;
-      this.shiftDown();
+      //this.shiftDown();
     }
   }
 
