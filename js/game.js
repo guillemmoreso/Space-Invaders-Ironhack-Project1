@@ -5,28 +5,33 @@ class Game {
     this.gameHeight = gameHeight;
     this.enemies = [];
     this.ctx = ctx;
+    this.gameOver = false;
   }
 
   start() {
     this.spaceship = new Spaceship(this);
     this._createEnemies();
     this._inputHandler();
-    this._collision();
     window.requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   update() {
     this.spaceship.update();
+    this._collision();
   }
 
   draw() {
     this.spaceship.draw();
     this._drawBullet();
     this._drawEnemies();
+    this._drawEnemiesBullets();
   }
 
   _drawEnemies() {
     this.enemies.forEach(enemy => {
+      if (enemy.y >= this.gameHeight) {
+        this.gameOver = true;
+      }
       enemy.clear();
       if (enemy.direction) {
         enemy.moveRight();
@@ -41,27 +46,38 @@ class Game {
         });
       }
       enemy.draw();
-      // enemy.bombing();
     });
   }
 
   _drawBullet() {
-    this.spaceship.bullets.forEach(bullet => {
-      bullet.draw();
-    });
     this.spaceship.bullets.forEach((bullet, index) => {
       if (bullet.y < 0) {
         this.spaceship.bullets.splice(index, 1);
+      } else {
+        bullet.update();
+        bullet.draw();
       }
-      bullet.update();
-    }); //Verificar que funciona correcto al 100%
+    });
+  }
+
+  _drawEnemiesBullets() {
+    this.enemies.forEach(enemy => {
+      enemy.bombs.forEach((bomb, index) => {
+        if (bomb.y >= this.gameHeight) {
+          enemy.bombs.splice(index, 1);
+        } else {
+          bomb.update();
+          bomb.draw();
+        }
+      });
+    });
   }
 
   _createEnemies() {
     for (let i = 0; i < 30; i++) {
       let x = 20 + (i % 8) * 60;
       let y = 20 + (i % 3) * 60;
-      this.enemies.push(new Enemy(x, y, 20, 20, this.ctx));
+      this.enemies.push(new Enemy(x, y, 20, this.ctx));
     }
   }
 
@@ -87,13 +103,13 @@ class Game {
   // }
 
   _collision() {
-    this.spaceship.bullets.forEach(bullet => {
+    this.spaceship.bullets.forEach((bullet, indexBullet) => {
       this.enemies.forEach(enemy => {
         if (
-          bullet.y < enemy.y /*+ enemy.height*/ &&
+          bullet.y < enemy.y + enemy.size &&
           bullet.y > enemy.y &&
           bullet.x > enemy.x &&
-          bullet.x /*+ bullet.width*/ < enemy.x /*+ enemy.height*/
+          bullet.x + bullet.width < enemy.x + enemy.size
         ) {
           setTimeout(() => {
             let currentIndex = this.enemies.indexOf(enemy);
@@ -102,6 +118,12 @@ class Game {
           this.spaceship.bullets.splice(indexBullet, 1);
         }
       });
+    });
+
+    this.enemies.forEach(element => {
+      if (element.y + element.size / 2 > this.spaceship.y) {
+        this.gameOver = true;
+      }
     });
   }
 
@@ -141,10 +163,14 @@ class Game {
 
   gameLoop() {
     this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight); //Clear Everytime sth gets updated
-
-    this.update();
-    this.draw();
-
+    if (this.gameOver === false) {
+      this.update();
+      this.draw();
+    } else {
+      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight); //Clear Everytime sth gets updated
+      this.ctx.font = "45px Comic Sans";
+      this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
+    }
     requestAnimationFrame(this.gameLoop.bind(this)); //When the next game is ready call this loop again
   }
 }

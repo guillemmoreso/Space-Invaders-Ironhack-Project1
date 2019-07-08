@@ -1,10 +1,9 @@
 "use strict";
 class Enemy {
-  constructor(x, y, width, height, ctx) {
+  constructor(x, y, size, ctx) {
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
+    this.size = size;
     this.ctx = ctx;
 
     this.bombs = [];
@@ -15,11 +14,11 @@ class Enemy {
     this.yVelocidad = 1;
   }
   draw() {
-    this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.ctx.fillRect(this.x, this.y, this.size, this.size);
   }
 
   clear() {
-    this.ctx.clearRect(this.x, this.y, this.width, this.height);
+    this.ctx.clearRect(this.x, this.y, this.size, this.size);
   }
 
   moveRight() {
@@ -31,10 +30,13 @@ class Enemy {
 
   update() {}
 
-  // bombing() {
-  //   //Aixo no funciona
-  //   setTimeout(function() {
-  //     this.bombs.push(new Bomb(this.x, this.y, 2, 20));
-  //   }, 10000);
-  // }
+  bombing() {
+    let randTime = Math.random() * 10000;
+    setTimeout(
+      function() {
+        this.bombs.push(new Bomb(this.x, this.y, 2, 20));
+      }.bind(this),
+      randTime
+    );
+  }
 }
