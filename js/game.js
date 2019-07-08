@@ -40,9 +40,10 @@ class Game {
         });
       }
       enemy.draw();
+      // enemy.bombing();
     });
   }
-  
+
   _drawBullet() {
     this.spaceship.bullets.forEach(bullet => {
       bullet.draw();

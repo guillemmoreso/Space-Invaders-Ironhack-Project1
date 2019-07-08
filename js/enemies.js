@@ -7,6 +7,8 @@ class Enemy {
     this.height = height;
     this.ctx = ctx;
 
+    this.bombs = [];
+
     this.direction = true;
 
     this.xVelocidad = 1;
@@ -28,4 +30,11 @@ class Enemy {
   }
 
   update() {}
+
+  // bombing() {
+  //   //Aixo no funciona
+  //   setTimeout(function() {
+  //     this.bombs.push(new Bomb(this.x, this.y, 2, 20));
+  //   }, 10000);
+  // }
 }

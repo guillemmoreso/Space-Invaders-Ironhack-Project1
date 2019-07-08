@@ -14,6 +14,6 @@ class Bomb {
   }
 
   update() {
-    this.y = this.y + 8;
+    this.y = this.y - 8;
   }
 }
