@@ -5,7 +5,7 @@ class Bullet {
     this.height = height;
     this.x = x; // - this.width / 2;
     this.y = y;
-    this.speed = 5;
+    this.speed = 20;
     this.ctx = ctx;
   }
 

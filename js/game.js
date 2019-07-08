@@ -1,18 +1,21 @@
 "use strict";
 class Game {
-  constructor(options) {
-    this.gameWidth = options.gameWidth;
-    this.gameHeight = options.gameHeight;
+  constructor(ctx, gameWidth, gameHeight) {
+    this.gameWidth = gameWidth;
+    this.gameHeight = gameHeight;
     this.enemies = [];
-    this.ctx = options.ctx;
-    this.gameOver = undefined;
+    this.ctx = ctx;
+  }
+
+  start() {
+    this.spaceship = new Spaceship(this);
+    this._createEnemies();
+    this._inputHandler();
+    this._collision();
   }
 
   update() {
     this.spaceship.update();
-    if (this.intervalGame !== undefined) {
-      window.requestAnimationFrame(this.update.bind(this));
-    }
   }
 
   draw() {
@@ -36,16 +39,28 @@ class Game {
           enemyY.direction = !enemyY.direction;
         });
       }
-
       enemy.draw();
     });
   }
+
+  // _drawBullet() {
+  //   this.spaceship.bullets.forEach(bullet => {
+  //     bullet.draw();
+  //     bullet.update();
+  //   });
+  // }
 
   _drawBullet() {
     this.spaceship.bullets.forEach(bullet => {
       bullet.draw();
       bullet.update();
     });
+    this.spaceship.bullets.forEach((bullet, index) => {
+      if (bullet.y < 0) {
+        this.spaceship.bullets.splice(index, 1);
+      }
+      bullet.update();
+    }); //Verificar que funciona
   }
 
   _createEnemies() {
@@ -56,25 +71,44 @@ class Game {
     }
   }
 
-  detectCollision(enemy) {
-    let bottomOfBullet = this.y + this.height;
-    let topOfBullet = this.y;
+  // _collision(enemy) {
+  //   let bottomOfBullet = this.y + this.height;
+  //   let topOfBullet = this.y;
 
-    let topOfEnemy = enemy.y;
-    let leftSideOfEnemy = enemy.x;
-    let rightSideOfEnemy = enemy.x + enemy.width;
-    let bottomOfEnemy = enemy.y + enemy.height;
+  //   let topOfEnemy = enemy.y;
+  //   let leftSideOfEnemy = enemy.x;
+  //   let rightSideOfEnemy = enemy.x + enemy.width;
+  //   let bottomOfEnemy = enemy.y + enemy.height;
 
-    if (
-      bottomOfBullet >= topOfEnemy &&
-      topOfBullet <= bottomOfEnemy &&
-      this.x >= leftSideOfEnemy &&
-      this.x + this.width <= rightSideOfEnemy
-    ) {
-      return console.log("pam");
-    } else {
-      return console.log("nada");
-    }
+  //   if (
+  //     bottomOfBullet >= topOfEnemy &&
+  //     topOfBullet <= bottomOfEnemy &&
+  //     this.x >= leftSideOfEnemy &&
+  //     this.x + this.width <= rightSideOfEnemy
+  //   ) {
+  //     return console.log("pam");
+  //   } else {
+  //     return console.log("nada");
+  //   }
+  // }
+
+  _collision() {
+    this.spaceship.bullets.forEach(bullet => {
+      this.enemies.forEach(enemy => {
+        if (
+          bullet.y < enemy.y /*+ enemy.height*/ &&
+          bullet.y > enemy.y &&
+          bullet.x > enemy.x &&
+          bullet.x /*+ bullet.width*/ < enemy.x /*+ enemy.height*/
+        ) {
+          setTimeout(() => {
+            let currentIndex = this.enemies.indexOf(enemy);
+            this.enemies.splice(currentIndex, 1);
+          }, 50);
+          this.spaceship.bullets.splice(indexBullet, 1);
+        }
+      });
+    });
   }
 
   _inputHandler() {
@@ -109,20 +143,6 @@ class Game {
         this.spaceship.attack();
       }
     });
-  }
-
-  pause() {
-    if (this.intervalGame) {
-      window.cancelAnimationFrame(this.intervalGame);
-      this.intervalGame = undefined;
-    }
-  }
-
-  start() {
-    this.spaceship = new Spaceship(this);
-    this._createEnemies();
-    this._inputHandler();
-    this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 }
 //Copiar aixo del Snake
