@@ -42,25 +42,17 @@ class Game {
       enemy.draw();
     });
   }
-
-  // _drawBullet() {
-  //   this.spaceship.bullets.forEach(bullet => {
-  //     bullet.draw();
-  //     bullet.update();
-  //   });
-  // }
-
+  
   _drawBullet() {
     this.spaceship.bullets.forEach(bullet => {
       bullet.draw();
-      bullet.update();
     });
     this.spaceship.bullets.forEach((bullet, index) => {
       if (bullet.y < 0) {
         this.spaceship.bullets.splice(index, 1);
       }
       bullet.update();
-    }); //Verificar que funciona
+    }); //Verificar que funciona correcto al 100%
   }
 
   _createEnemies() {
@@ -145,23 +137,3 @@ class Game {
     });
   }
 }
-//Copiar aixo del Snake
-// la funcion de abajo sabe cuando tiene que volver a llamar la funcion que se pasa por parametro;
-/*if (this.intervalGame !== undefined) {
-  window.requestAnimationFrame(this._update.bind(this));
-}
-  }
-pause() {
-  if (this.intervalGame) {
-    window.cancelAnimationFrame(this.intervalGame);
-    this.intervalGame = undefined;
-  }
-}
-start() {
-  // bucle infinito que se encarga de pintar el canvas
-  this._assignControlsToKeys();
-  this._generateFood();
-  this.snake.move();
-  this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
-}
-}*/

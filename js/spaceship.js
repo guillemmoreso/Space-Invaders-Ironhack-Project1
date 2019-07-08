@@ -6,7 +6,7 @@ class Spaceship {
     this.height = 40;
     this.ctx = ctx;
 
-    this.bullets = []; //NV
+    this.bullets = [];
 
     this.maxSpeed = 10;
     this.speed = 0;
@@ -51,5 +51,5 @@ class Spaceship {
     this.bullets.push(
       new Bullet(this.position.x + this.width / 2, this.position.y, 2, 20)
     );
-  } //Cuando tenga la Y hacer un slice con un foreach
+  }
 }
