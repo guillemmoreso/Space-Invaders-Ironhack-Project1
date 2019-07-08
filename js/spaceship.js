@@ -4,7 +4,7 @@ class Spaceship {
     this.gameWidth = game.gameWidth;
     this.width = 100;
     this.height = 40;
-    this.ctx = ctx;
+    this.ctx = game.ctx;
 
     this.bullets = []; //NV
 

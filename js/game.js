@@ -1,20 +1,18 @@
 "use strict";
 class Game {
-  constructor(ctx, gameWidth, gameHeight) {
-    this.gameWidth = gameWidth;
-    this.gameHeight = gameHeight;
+  constructor(options) {
+    this.gameWidth = options.gameWidth;
+    this.gameHeight = options.gameHeight;
     this.enemies = [];
-    this.ctx = ctx;
-  }
-
-  start() {
-    this.spaceship = new Spaceship(this);
-    this._createEnemies();
-    this._inputHandler();
+    this.ctx = options.ctx;
+    this.gameOver = undefined;
   }
 
   update() {
     this.spaceship.update();
+    if (this.intervalGame !== undefined) {
+      window.requestAnimationFrame(this.update.bind(this));
+    }
   }
 
   draw() {
@@ -111,6 +109,20 @@ class Game {
         this.spaceship.attack();
       }
     });
+  }
+
+  pause() {
+    if (this.intervalGame) {
+      window.cancelAnimationFrame(this.intervalGame);
+      this.intervalGame = undefined;
+    }
+  }
+
+  start() {
+    this.spaceship = new Spaceship(this);
+    this._createEnemies();
+    this._inputHandler();
+    this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 }
 //Copiar aixo del Snake
