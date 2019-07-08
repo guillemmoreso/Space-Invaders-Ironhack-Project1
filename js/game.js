@@ -12,6 +12,7 @@ class Game {
     this._createEnemies();
     this._inputHandler();
     this._collision();
+    window.requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   update() {
@@ -136,5 +137,14 @@ class Game {
         this.spaceship.attack();
       }
     });
+  }
+
+  gameLoop() {
+    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight); //Clear Everytime sth gets updated
+
+    this.update();
+    this.draw();
+
+    requestAnimationFrame(this.gameLoop.bind(this)); //When the next game is ready call this loop again
   }
 }
