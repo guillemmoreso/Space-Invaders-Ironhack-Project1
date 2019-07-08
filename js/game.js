@@ -58,6 +58,27 @@ class Game {
     }
   }
 
+  detectCollision(enemy) {
+    let bottomOfBullet = this.y + this.height;
+    let topOfBullet = this.y;
+
+    let topOfEnemy = enemy.y;
+    let leftSideOfEnemy = enemy.x;
+    let rightSideOfEnemy = enemy.x + enemy.width;
+    let bottomOfEnemy = enemy.y + enemy.height;
+
+    if (
+      bottomOfBullet >= topOfEnemy &&
+      topOfBullet <= bottomOfEnemy &&
+      this.x >= leftSideOfEnemy &&
+      this.x + this.width <= rightSideOfEnemy
+    ) {
+      return console.log("pam");
+    } else {
+      return console.log("nada");
+    }
+  }
+
   _inputHandler() {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
