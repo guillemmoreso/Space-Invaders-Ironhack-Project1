@@ -9,8 +9,8 @@ class Enemy {
 
     this.direction = true;
 
-    this.xVelocidad = 3;
-    this.yVelocidad = 3;
+    this.xVelocidad = 1;
+    this.yVelocidad = 1;
   }
   draw() {
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -19,26 +19,12 @@ class Enemy {
   clear() {
     this.ctx.clearRect(this.x, this.y, this.width, this.height);
   }
-  shiftDown() {
-    this.y += this.yVelocidad;
-    if (this.y === 500) {
-      this.yVelocidad = 0;
-      this.moveLeft();
-    }
-  }
+
   moveRight() {
     this.x += this.xVelocidad;
-    // if (this.x === 500) {
-    //   this.xVelocidad = 0;
-    //   this.shiftDown();
-    // }
   }
   moveLeft() {
     this.x -= this.xVelocidad;
-    // if (this.x === 100) {
-    //   this.xVelocidad = 0;
-    //   //this.shiftDown();
-    // }
   }
 
   update() {}

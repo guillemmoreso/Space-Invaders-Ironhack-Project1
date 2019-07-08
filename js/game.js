@@ -26,7 +26,6 @@ class Game {
   _drawEnemies() {
     this.enemies.forEach(enemy => {
       enemy.clear();
-
       if (enemy.direction) {
         enemy.moveRight();
       } else {
@@ -35,7 +34,7 @@ class Game {
 
       if (enemy.x > 750 || enemy.x < 0) {
         this.enemies.forEach(enemyY => {
-          enemyY.y += 50;
+          enemyY.y += 20;
           enemyY.direction = !enemyY.direction;
         });
       }
@@ -43,23 +42,6 @@ class Game {
       enemy.draw();
     });
   }
-
-  // _drawEnemies() {
-  //   var edge = false;
-  //   for (var i = 0; i < this.enemies.length; i++) {
-  //     this.enemies[i].enemy.move();
-  //     console.log(this.enemies[i].enemy.move());
-  //     if (this.enemies[i].x > this.gameWidth || this.enemies[i].x < 0) {
-  //       edge = true;
-  //     }
-  //   }
-
-  //   if (edge) {
-  //     for (var i = 0; i < this.enemies.length; i++) {
-  //       this.enemies[i].shiftDown();
-  //     }
-  //   }
-  // }
 
   _drawBullet() {
     this.spaceship.bullets.forEach(bullet => {
