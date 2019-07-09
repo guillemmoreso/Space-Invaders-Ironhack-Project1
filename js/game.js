@@ -6,6 +6,7 @@ class Game {
     this.enemies = [];
     this.ctx = ctx;
     this.gameOver = false;
+    this.gameWon = false;
   }
 
   start() {
@@ -18,12 +19,15 @@ class Game {
   update() {
     this.spaceship.update();
     this._collision();
+    if (this.enemies.length === 0) {
+      this.gameWon = true;
+    }
   }
 
   draw() {
     this.spaceship.draw();
-    this._drawBullet();
     this._drawEnemies();
+    this._drawBullet();
     this._drawEnemiesBullets();
   }
 
@@ -80,27 +84,6 @@ class Game {
       this.enemies.push(new Enemy(x, y, 20, this.ctx));
     }
   }
-
-  // _collision(enemy) {
-  //   let bottomOfBullet = this.y + this.height;
-  //   let topOfBullet = this.y;
-
-  //   let topOfEnemy = enemy.y;
-  //   let leftSideOfEnemy = enemy.x;
-  //   let rightSideOfEnemy = enemy.x + enemy.width;
-  //   let bottomOfEnemy = enemy.y + enemy.height;
-
-  //   if (
-  //     bottomOfBullet >= topOfEnemy &&
-  //     topOfBullet <= bottomOfEnemy &&
-  //     this.x >= leftSideOfEnemy &&
-  //     this.x + this.width <= rightSideOfEnemy
-  //   ) {
-  //     return console.log("pam");
-  //   } else {
-  //     return console.log("nada");
-  //   }
-  // }
 
   _collision() {
     this.spaceship.bullets.forEach((bullet, indexBullet) => {
@@ -162,15 +145,21 @@ class Game {
   }
 
   gameLoop() {
-    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight); //Clear Everytime sth gets updated
-    if (this.gameOver === false) {
+    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+    if (this.gameOver === false && this.gameWon === false) {
       this.update();
       this.draw();
-    } else {
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight); //Clear Everytime sth gets updated
+    }
+    if (this.gameOver === true) {
+      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.font = "45px Comic Sans";
       this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
     }
-    requestAnimationFrame(this.gameLoop.bind(this)); //When the next game is ready call this loop again
+    if (this.gameWon === true) {
+      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+      this.ctx.font = "45px Comic Sans";
+      this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
+    }
+    requestAnimationFrame(this.gameLoop.bind(this));
   }
 }
