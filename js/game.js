@@ -4,9 +4,11 @@ class Game {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.enemies = [];
+    this.bombs = [];
     this.ctx = ctx;
     this.gameOver = false;
     this.gameWon = false;
+    this.counterBombing = 0;
   }
 
   start() {
@@ -17,9 +19,16 @@ class Game {
   }
 
   update() {
+    this.counterBombing++;
+    console.log(this.counterBombing);
     this.spaceship.update();
-    this._collision();
-    this._drawEnemiesBombs();
+    if (this.counterBombing === 30) {
+      this._bombing();
+      this.counterBombing = 0;
+    }
+    this._collisionBullets();
+    this._collisionBombs();
+
     if (this.enemies.length === 0) {
       this.gameWon = true;
     }
@@ -66,15 +75,14 @@ class Game {
   }
 
   _drawEnemiesBombs() {
-    this.enemies.forEach(enemy => {
-      enemy.bombs.forEach((bomb, index) => {
-        if (bomb.y >= this.gameHeight) {
-          enemy.bombs.splice(index, 1);
-        } else {
-          bomb.update();
-          bomb.draw();
-        }
-      });
+    this.bombs.forEach((bomb, index) => {
+      if (bomb.y >= this.gameHeight) {
+        this.bombs.splice(index, 1);
+      } else {
+        //No estoy pillando las referencias
+        bomb.update();
+        bomb.draw();
+      }
     });
   }
 
@@ -86,7 +94,7 @@ class Game {
     }
   }
 
-  _collision() {
+  _collisionBullets() {
     this.spaceship.bullets.forEach((bullet, indexBullet) => {
       this.enemies.forEach(enemy => {
         if (
@@ -98,7 +106,7 @@ class Game {
           setTimeout(() => {
             let currentIndex = this.enemies.indexOf(enemy);
             this.enemies.splice(currentIndex, 1);
-          }, 50);
+          }, 0);
           this.spaceship.bullets.splice(indexBullet, 1);
         }
       });
@@ -109,20 +117,39 @@ class Game {
         this.gameOver = true;
       }
     });
-
-    this.enemies.forEach((bomb, index) => {
-      if (bomb.y + bomb.height > this.gameHeight) {
-        this.enemies.splice(index, 1);
-      } else if (bomb.y + bomb.height > this.spaceship.y) {
-        if (
-          bomb.x > this.spaceship.x &&
-          bomb.x + bomb.width < this.spaceship.x + this.spaceship.width
-        ) {
-          this.enemies.splice(index, 1);
-          this.gameOver = true;
-        }
+  }
+  _collisionBombs() {
+    this.bombs.forEach(bomb => {
+      if (
+        bomb.y < this.spaceship.position.y + this.spaceship.height &&
+        bomb.y > this.spaceship.position.y &&
+        bomb.x > this.spaceship.position.x &&
+        bomb.x + bomb.width < this.spaceship.position.x + this.spaceship.width
+      ) {
+        this.gameOver = true;
       }
     });
+  }
+
+  _bombing() {
+    // let randTime = 1000;
+    // setTimeout(
+    //   function() {
+    //     this.bombs.push(new Bomb(this.x, this.y, 2, 20));
+    //   }.bind(this),
+    //   randTime
+    // );
+    if (Math.random() > 0.1) {
+      let enemyRandoom = Math.floor(Math.random() * this.enemies.length);
+      this.bombs.push(
+        new Bomb(
+          this.enemies[enemyRandoom].x,
+          this.enemies[enemyRandoom].y,
+          2,
+          20
+        )
+      );
+    }
   }
 
   _inputHandler() {

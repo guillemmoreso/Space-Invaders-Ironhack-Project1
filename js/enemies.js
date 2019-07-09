@@ -6,7 +6,7 @@ class Enemy {
     this.size = size;
     this.ctx = ctx;
 
-    this.bombs = [];
+    //this.bombs = [];
 
     this.direction = true;
 
@@ -29,14 +29,4 @@ class Enemy {
   }
 
   update() {}
-
-  bombing() {
-    let randTime = 3000;
-    setTimeout(
-      function() {
-        this.bombs.push(new Bomb(this.x, this.y, 2, 20));
-      }.bind(this),
-      randTime
-    );
-  }
 }
