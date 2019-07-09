@@ -31,7 +31,7 @@ class Enemy {
   update() {}
 
   bombing() {
-    let randTime = Math.random() * 10000;
+    let randTime = 3000;
     setTimeout(
       function() {
         this.bombs.push(new Bomb(this.x, this.y, 2, 20));
