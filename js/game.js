@@ -9,6 +9,7 @@ class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
+    this.intervalBombing = 30;
   }
 
   start() {
@@ -22,7 +23,7 @@ class Game {
     this.counterBombing++;
     console.log(this.counterBombing);
     this.spaceship.update();
-    if (this.counterBombing === 30) {
+    if (this.counterBombing === this.intervalBombing) {
       this._bombing();
       this.counterBombing = 0;
     }
@@ -103,6 +104,7 @@ class Game {
           bullet.x > enemy.x &&
           bullet.x + bullet.width < enemy.x + enemy.size
         ) {
+          //Corregir
           setTimeout(() => {
             let currentIndex = this.enemies.indexOf(enemy);
             this.enemies.splice(currentIndex, 1);
@@ -132,13 +134,6 @@ class Game {
   }
 
   _bombing() {
-    // let randTime = 1000;
-    // setTimeout(
-    //   function() {
-    //     this.bombs.push(new Bomb(this.x, this.y, 2, 20));
-    //   }.bind(this),
-    //   randTime
-    // );
     if (Math.random() > 0.1) {
       let enemyRandoom = Math.floor(Math.random() * this.enemies.length);
       this.bombs.push(
@@ -183,6 +178,9 @@ class Game {
     document.addEventListener("keyup", event => {
       if (event.keyCode === 32) {
         this.spaceship.attack();
+      }
+      if (event.keyCode === 80) {
+        this.gameWon = true;
       }
     });
   }
