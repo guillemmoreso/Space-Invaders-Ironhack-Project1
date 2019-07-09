@@ -4,6 +4,7 @@ class Game {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.enemies = [];
+    this.enemiesBombs = [];
     this.ctx = ctx;
     this.gameOver = false;
     this.gameWon = false;
@@ -19,6 +20,8 @@ class Game {
   update() {
     this.spaceship.update();
     this._collision();
+    this._drawEnemiesBombs();
+
     if (this.enemies.length === 0) {
       this.gameWon = true;
     }
@@ -28,7 +31,7 @@ class Game {
     this.spaceship.draw();
     this._drawEnemies();
     this._drawBullet();
-    this._drawEnemiesBullets();
+    this._drawEnemiesBombs();
   }
 
   _drawEnemies() {
@@ -64,7 +67,7 @@ class Game {
     });
   }
 
-  _drawEnemiesBullets() {
+  _drawEnemiesBombs() {
     this.enemies.forEach(enemy => {
       enemy.bombs.forEach((bomb, index) => {
         if (bomb.y >= this.gameHeight) {
@@ -106,6 +109,20 @@ class Game {
     this.enemies.forEach(element => {
       if (element.y + element.size / 2 > this.spaceship.y) {
         this.gameOver = true;
+      }
+    });
+
+    this.enemiesBombs.forEach((bomb, index) => {
+      if (bomb.y + bomb.height > this.gameHeight) {
+        this.enemiesBombs.splice(index, 1);
+      } else if (bomb.y + bomb.height > this.spaceship.y) {
+        if (
+          bomb.x > this.spaceship.x &&
+          bomb.x + bomb.width < this.spaceship.x + this.spaceship.width
+        ) {
+          this.enemiesBombs.splice(index, 1);
+          this.gameOver = true;
+        }
       }
     });
   }
