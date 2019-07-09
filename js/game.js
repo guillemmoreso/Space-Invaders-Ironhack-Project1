@@ -10,6 +10,7 @@ class Game {
     this.gameWon = false;
     this.counterBombing = 0;
     this.intervalBombing = 30;
+    this.gameInterval = undefined;
   }
 
   start() {
@@ -33,6 +34,10 @@ class Game {
     if (this.enemies.length === 0) {
       this.gameWon = true;
     }
+  }
+
+  _pauseGame() {
+    window.cancelAnimationFrame(this.gameInterval);
   }
 
   draw() {
@@ -180,7 +185,7 @@ class Game {
         this.spaceship.attack();
       }
       if (event.keyCode === 80) {
-        this.gameWon = true;
+        this._pauseGame();
       }
     });
   }
