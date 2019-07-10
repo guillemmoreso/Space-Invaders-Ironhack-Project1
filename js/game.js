@@ -95,7 +95,7 @@ class Game {
     for (let i = 0; i < 30; i++) {
       let x = 20 + (i % 8) * 60;
       let y = 20 + (i % 3) * 60;
-      this.enemies.push(new Enemy(x, y, 20, this.ctx));
+      this.enemies.push(new Enemy(x, y, 40, this.ctx));
     }
   }
 
@@ -144,7 +144,7 @@ class Game {
         new Bomb(
           this.enemies[enemyRandoom].x,
           this.enemies[enemyRandoom].y,
-          2,
+          4,
           20
         )
       );

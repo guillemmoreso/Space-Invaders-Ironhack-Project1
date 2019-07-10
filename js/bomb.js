@@ -10,6 +10,7 @@ class Bomb {
   }
 
   draw() {
+    ctx.fillStyle = "#1EFF65";
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 

@@ -10,6 +10,8 @@ class Bullet {
   }
 
   draw() {
+    ctx.fillStyle = "#F21111";
+
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
