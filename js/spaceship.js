@@ -2,8 +2,8 @@
 class Spaceship {
   constructor(game) {
     this.gameWidth = game.gameWidth;
-    this.width = 100;
-    this.height = 100;
+    this.width = 80;
+    this.height = 150;
     this.ctx = ctx;
 
     this.bullets = [];
@@ -31,7 +31,7 @@ class Spaceship {
 
   draw() {
     this.image = new Image();
-    this.image.src = "./img/spaceship.png";
+    this.image.src = "./img/spray.png";
     this.ctx.drawImage(
       this.image,
       this.position.x,
@@ -56,7 +56,7 @@ class Spaceship {
   }
   attack() {
     this.bullets.push(
-      new Bullet(this.position.x + this.width / 2, this.position.y, 4, 20)
+      new Bullet(this.position.x + this.width / 3, this.position.y, 20, 40)
     );
   }
 }

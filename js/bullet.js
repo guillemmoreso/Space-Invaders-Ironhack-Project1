@@ -10,9 +10,11 @@ class Bullet {
   }
 
   draw() {
-    ctx.fillStyle = "#F21111";
-
-    this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.image = new Image();
+    this.image.src = "./img/spray-gas.png";
+    this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    // ctx.fillStyle = "#F21111";
+    // this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
   update() {

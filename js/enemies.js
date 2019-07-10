@@ -15,7 +15,7 @@ class Enemy {
   }
   draw() {
     this.image = new Image();
-    this.image.src = "./img/enemy.png";
+    this.image.src = "./img/enemies.png";
     this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
     // this.ctx.fillRect(this.x, this.y, this.size, this.size);
   }

@@ -9,7 +9,7 @@ class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
-    this.intervalBombing = 30;
+    this.intervalBombing = 60;
     this.gameInterval = undefined;
   }
 
@@ -144,8 +144,8 @@ class Game {
         new Bomb(
           this.enemies[enemyRandoom].x,
           this.enemies[enemyRandoom].y,
-          4,
-          20
+          30,
+          30
         )
       );
     }
