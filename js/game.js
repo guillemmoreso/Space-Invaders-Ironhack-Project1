@@ -11,6 +11,10 @@ class Game {
     this.counterBombing = 0;
     this.intervalBombing = 60;
     this.gameInterval = undefined;
+    this.spraySound = new Audio("./src/Aerosol Can 01.wav");
+    this.mosquitoAttackSound = new Audio("./src/mosquito-attack.wav");
+    this.mosquitoPain = new Audio("./src/mosquitoPain.wav");
+    this.gameWinSnores = new Audio("./src/snores.wav");
   }
 
   start() {
@@ -148,6 +152,7 @@ class Game {
           30
         )
       );
+      this.mosquitoAttackSound.play();
     }
   }
 
@@ -182,6 +187,7 @@ class Game {
     document.addEventListener("keyup", event => {
       if (event.keyCode === 32) {
         this.spaceship.attack();
+        this.spraySound.play();
       }
       if (event.keyCode === 80) {
         this._pauseGame();
@@ -199,11 +205,15 @@ class Game {
       this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.font = "45px Comic Sans";
       this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
+      this.mosquitoPain.play();
+      this.mosquitoPain = undefined;
     }
     if (this.gameWon === true) {
       this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.font = "45px Comic Sans";
       this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
+      this.gameWinSnores.play();
+      this.gameWinSnores = undefined;
     }
     requestAnimationFrame(this.gameLoop.bind(this));
   }
