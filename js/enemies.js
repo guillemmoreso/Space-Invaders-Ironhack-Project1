@@ -14,7 +14,10 @@ class Enemy {
     this.yVelocidad = 1;
   }
   draw() {
-    this.ctx.fillRect(this.x, this.y, this.size, this.size);
+    this.image = new Image();
+    this.image.src = "./img/enemy.png";
+    this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
+    // this.ctx.fillRect(this.x, this.y, this.size, this.size);
   }
 
   clear() {

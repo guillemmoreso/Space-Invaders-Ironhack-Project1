@@ -30,12 +30,19 @@ class Spaceship {
   }
 
   draw() {
-    this.ctx.fillRect(
+    this.image = new Image();
+    this.image.src = "./img/spaceship.png";
+    this.ctx.drawImage(
+      this.image,
       this.position.x,
       this.position.y,
       this.width,
       this.height
     );
+
+    // this.ctx.fillRect(
+    // this.position.x, this.position.y, this.width, this.height;
+    // );
   }
 
   update() {

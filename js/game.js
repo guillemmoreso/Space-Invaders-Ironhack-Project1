@@ -22,7 +22,6 @@ class Game {
 
   update() {
     this.counterBombing++;
-    console.log(this.counterBombing);
     this.spaceship.update();
     if (this.counterBombing === this.intervalBombing) {
       this._bombing();

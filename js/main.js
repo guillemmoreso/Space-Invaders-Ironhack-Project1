@@ -6,5 +6,3 @@ const GAME_HEIGHT = 600;
 
 const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT); // Starts the new Game instantiating the Game Object
 game.start();
-
-
