@@ -33,7 +33,7 @@ class Game {
     }
     this._collisionBullets();
     this._collisionBombs();
-
+    this._checkCollisionEnemiesWithBottom();
     if (this.enemies.length === 0) {
       this.gameWon = true;
     }
@@ -47,17 +47,21 @@ class Game {
 
   draw() {
     this.spaceship.draw(this.ctx);
-    this._drawEnemies(this.ctx);
+    this._drawEnemies();
     this._drawBullet(this.ctx);
     this._drawEnemiesBombs(this.ctx);
   }
 
-  _drawEnemies() {
+  _checkCollisionEnemiesWithBottom() {
     this.enemies.forEach(enemy => {
       if (enemy.y >= this.gameHeight) {
         this.gameOver = true;
       }
-      enemy.clear(this.ctx);
+    });
+  }
+
+  _drawEnemies() {
+    this.enemies.forEach(enemy => {
       if (enemy.direction) {
         enemy.moveRight();
       } else {
@@ -65,13 +69,21 @@ class Game {
       }
 
       if (enemy.x > this.gameWidth - 30 || enemy.x < 0) {
-        this.enemies.forEach(enemyY => {
-          enemyY.y += 40;
-          enemyY.direction = !enemyY.direction;
-        });
+        this._changeDirection();
       }
-      enemy.draw(this.ctx);
+      this.ctx.drawImage(enemy.image, enemy.x, enemy.y, enemy.size, enemy.size);
     });
+  }
+
+  _changeDirection() {
+    // this.enemies.forEach(enemy => {
+    //   enemy.y += 40;
+    //   enemy.direction = !enemy.direction;
+    // });
+    for (let i = 0; i < this.enemies.length; i++) {
+      this.enemies[i].y += 40;
+      this.enemies[i].direction = !this.enemies[i].direction;
+    }
   }
 
   _drawBullet() {
@@ -101,7 +113,7 @@ class Game {
     for (let i = 0; i < 30; i++) {
       let x = 20 + (i % 8) * 60;
       let y = 20 + (i % 3) * 60;
-      this.enemies.push(new Enemy(x, y, 40, this.ctx));
+      this.enemies.push(new Enemy(x, y, 40));
     }
   }
 
