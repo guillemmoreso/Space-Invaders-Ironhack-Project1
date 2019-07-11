@@ -6,13 +6,12 @@ class Bullet {
     this.x = x; // - this.width / 2;
     this.y = y;
     this.speed = 20;
-    this.ctx = ctx;
   }
 
-  draw() {
+  draw(ctx) {
     this.image = new Image();
     this.image.src = "./img/spray-gas.png";
-    this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     // ctx.fillStyle = "#F21111";
     // this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }

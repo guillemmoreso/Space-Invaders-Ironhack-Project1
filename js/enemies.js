@@ -4,7 +4,6 @@ class Enemy {
     this.x = x;
     this.y = y;
     this.size = size;
-    this.ctx = ctx;
 
     //this.bombs = [];
 
@@ -13,15 +12,15 @@ class Enemy {
     this.xVelocidad = 2;
     this.yVelocidad = 2;
   }
-  draw() {
+  draw(ctx) {
     this.image = new Image();
     this.image.src = "./img/enemies.png";
-    this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
+    ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
     // this.ctx.fillRect(this.x, this.y, this.size, this.size);
   }
 
-  clear() {
-    this.ctx.clearRect(this.x, this.y, this.size, this.size);
+  clear(ctx) {
+    ctx.clearRect(this.x, this.y, this.size, this.size);
   }
 
   moveRight() {

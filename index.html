@@ -13,12 +13,20 @@
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
   </head>
   <body>
-    <canvas
-      id="gameScreen"
-      width="800"
-      height="600"
-      style="background-color: aliceblue"
-    ></canvas>
+    <div id="splash" class="splash">
+      <div class="img-splash">
+        <img src="./img/favicon.png" alt="Game title " />
+      </div>
+      <button id="start" class="btn-start">START</button>
+    </div>
+    <div id="game" class="game">
+      <canvas
+        id="gameScreen"
+        width="800"
+        height="600"
+        style="background-color: aliceblue"
+      ></canvas>
+    </div>
     <div id="gameover" style="display: none">
       Game Over
     </div>

@@ -4,7 +4,6 @@ class Spaceship {
     this.gameWidth = game.gameWidth;
     this.width = 80;
     this.height = 150;
-    this.ctx = ctx;
 
     this.bullets = [];
 
@@ -29,10 +28,10 @@ class Spaceship {
     this.speed = 0;
   }
 
-  draw() {
+  draw(ctx) {
     this.image = new Image();
     this.image.src = "./img/spray.png";
-    this.ctx.drawImage(
+    ctx.drawImage(
       this.image,
       this.position.x,
       this.position.y,

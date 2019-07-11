@@ -46,10 +46,10 @@ class Game {
   }
 
   draw() {
-    this.spaceship.draw();
-    this._drawEnemies();
-    this._drawBullet();
-    this._drawEnemiesBombs();
+    this.spaceship.draw(this.ctx);
+    this._drawEnemies(this.ctx);
+    this._drawBullet(this.ctx);
+    this._drawEnemiesBombs(this.ctx);
   }
 
   _drawEnemies() {
@@ -57,7 +57,7 @@ class Game {
       if (enemy.y >= this.gameHeight) {
         this.gameOver = true;
       }
-      enemy.clear();
+      enemy.clear(this.ctx);
       if (enemy.direction) {
         enemy.moveRight();
       } else {
@@ -70,7 +70,7 @@ class Game {
           enemyY.direction = !enemyY.direction;
         });
       }
-      enemy.draw();
+      enemy.draw(this.ctx);
     });
   }
 
@@ -80,7 +80,7 @@ class Game {
         this.spaceship.bullets.splice(index, 1);
       } else {
         bullet.update();
-        bullet.draw();
+        bullet.draw(this.ctx);
       }
     });
   }
@@ -92,7 +92,7 @@ class Game {
       } else {
         //No estoy pillando las referencias
         bomb.update();
-        bomb.draw();
+        bomb.draw(this.ctx);
       }
     });
   }
