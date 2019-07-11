@@ -205,15 +205,25 @@ class Game {
       this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.font = "45px Comic Sans";
       this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
-      this.mosquitoPain.play();
-      this.mosquitoPain = undefined;
+      setTimeout(
+        function() {
+          this.mosquitoPain.play();
+          this.mosquitoPain = undefined;
+        }.bind(this),
+        2500
+      );
     }
     if (this.gameWon === true) {
       this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.font = "45px Comic Sans";
       this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
-      this.gameWinSnores.play();
-      this.gameWinSnores = undefined;
+      setTimeout(
+        function() {
+          this.gameWinSnores.play();
+          this.gameWinSnores = undefined;
+        }.bind(this),
+        2500
+      );
     }
     requestAnimationFrame(this.gameLoop.bind(this));
   }
