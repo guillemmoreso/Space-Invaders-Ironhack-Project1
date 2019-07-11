@@ -64,7 +64,7 @@ class Game {
 
       if (enemy.x > this.gameWidth - 30 || enemy.x < 0) {
         this.enemies.forEach(enemyY => {
-          enemyY.y += 20;
+          enemyY.y += 40;
           enemyY.direction = !enemyY.direction;
         });
       }

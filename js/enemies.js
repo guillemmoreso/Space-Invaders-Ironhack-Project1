@@ -10,8 +10,8 @@ class Enemy {
 
     this.direction = true;
 
-    this.xVelocidad = 1;
-    this.yVelocidad = 1;
+    this.xVelocidad = 2;
+    this.yVelocidad = 2;
   }
   draw() {
     this.image = new Image();
