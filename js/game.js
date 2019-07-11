@@ -21,7 +21,7 @@ class Game {
     this.spaceship = new Spaceship(this);
     this._createEnemies();
     this._inputHandler();
-    window.requestAnimationFrame(this.gameLoop.bind(this));
+    this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   update() {
@@ -37,10 +37,12 @@ class Game {
     if (this.enemies.length === 0) {
       this.gameWon = true;
     }
+    this.draw();
   }
 
   _pauseGame() {
     window.cancelAnimationFrame(this.gameInterval);
+    console.log(this.gameInterval);
   }
 
   draw() {
@@ -199,7 +201,6 @@ class Game {
     this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
     if (this.gameOver === false && this.gameWon === false) {
       this.update();
-      this.draw();
     }
     if (this.gameOver === true) {
       this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
