@@ -9,7 +9,7 @@ class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
-    this.intervalBombing = 860;
+    this.intervalBombing = 60;
     this.gameInterval = undefined;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
     this.mosquitoAttackSound = new Audio("./src/mosquito-attack.wav");
