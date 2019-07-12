@@ -4,12 +4,40 @@ body {
 
   text-align: center;
   background: url(../img/bricks1.jpg) no-repeat;
-  background-position-y: -150px;
 }
 canvas {
   border: 10px solid rgb(16, 21, 1);
   border-radius: 3%;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Bowlby One SC", cursive;
+  color: rgb(243, 255, 5);
+}
+
+h1 {
+  font-size: 5rem;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 2rem;
+  text-shadow: 2px 2px rgb(16, 21, 1);
+}
+
+h4 {
+  font-weight: 300;
+  font-size: 1.8rem;
+}
+
 button {
   font-family: "Bowlby One SC", cursive;
   font-size: 3rem;
@@ -22,6 +50,7 @@ button {
   border: 8px solid rgb(243, 255, 5);
   width: 300px;
 }
+
 .visible {
   display: block;
 }
@@ -33,4 +62,61 @@ button {
 .img-splash img {
   width: 600px;
   margin-top: 200px;
+}
+
+.header-score {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background: url(../images/User_Interface/PopupBox.png) no-repeat center;
+  background-size: 1310px;
+}
+
+.logo {
+  width: 300px;
+  padding-top: 20px;
+}
+
+.logo img {
+  width: 200px;
+}
+.lives {
+  border-left: 3px solid rgb(243, 255, 5);
+  padding: 20px 20px 20px 20px;
+  width: 375px;
+}
+.lives ul {
+  list-style-type: none;
+  overflow: hidden;
+}
+.lives li {
+  float: left;
+  width: 75px;
+}
+.lives img {
+  width: 75px;
+}
+.live-out {
+  filter: grayscale(100%);
+}
+.score {
+  width: 200px;
+  border-left: 3px solid rgb(243, 255, 5);
+  padding: 20px 20px 20px 20px;
+}
+
+.time {
+  width: 200px;
+  border-left: 3px solid rgb(243, 255, 5);
+  padding: 20px 20px 20px 20px;
+}
+.text-time,
+.text-score {
+  margin-top: 20px;
+  font-family: "Staatliches", cursive;
+  font-size: 3.5rem;
+  color: #9b0439f7;
+  text-shadow: 2px 2px rgb(16, 21, 1);
 }

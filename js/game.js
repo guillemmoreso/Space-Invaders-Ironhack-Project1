@@ -68,7 +68,7 @@ class Game {
         enemy.moveLeft();
       }
 
-      if (enemy.x > this.gameWidth - 30 || enemy.x < 0) {
+      if (enemy.x > this.gameWidth || enemy.x < 0) {
         this._changeDirection();
       }
       this.ctx.drawImage(enemy.image, enemy.x, enemy.y, enemy.size, enemy.size);

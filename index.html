@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Space Invaders</title>
+    <title>Mosquito Invaders</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
@@ -20,12 +20,34 @@
       <button id="start" class="btn-start">START</button>
     </div>
     <div id="game" class="game">
-      <canvas
-        id="gameScreen"
-        width="800"
-        height="600"
-        style="background-image: url(./img/bricks1.jpg)"
-      ></canvas>
+      <div class="header-score">
+        <div class="logo">
+          <img src="./img/enemies.png" alt="Game tittle " />
+        </div>
+        <div class="lives">
+          <h3>LIVES</h3>
+          <ul>
+            <li>
+              <img id="live01" src="./img/enemies.png" alt="" />
+            </li>
+            <li>
+              <img id="live02" src="./img/enemies.png" alt="" />
+            </li>
+            <li>
+              <img id="live03" src="./img/enemies.png" alt="" />
+            </li>
+          </ul>
+        </div>
+        <div class="score">
+          <h3>SCORE</h3>
+          <div class="text-score" id="tex-score">000</div>
+        </div>
+        <div class="time">
+          <h3>TIME</h3>
+          <div class="text-time" id="text-time"></div>
+        </div>
+      </div>
+      <canvas id="gameScreen" width="1200" height="800"></canvas>
     </div>
     <div id="gameover" style="display: none">
       Game Over
