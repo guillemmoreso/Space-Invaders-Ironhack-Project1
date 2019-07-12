@@ -21,9 +21,6 @@
     </div>
     <div id="game" class="game">
       <div class="header-score">
-        <div class="logo">
-          <img src="./img/enemies.png" alt="Game tittle " />
-        </div>
         <div class="lives">
           <h3>LIVES</h3>
           <ul>
@@ -48,10 +45,23 @@
         </div>
       </div>
       <canvas id="gameScreen" width="1200" height="800"></canvas>
+      <div class="game-controls">
+        <ul class="left-controls">
+          <li class="controls-label"></li>
+          <li class="up-label"></li>
+          <li class="down-label"></li>
+          <li class="left-label"></li>
+          <li class="right-label"></li>
+          <li class="space-label"></li>
+        </ul>
+        <ul class="right-controls">
+          <li class="pause-button"></li>
+          <li class="mute-button"></li>
+          <li class="reset-button"></li>
+        </ul>
+      </div>
     </div>
-    <div id="gameover" style="display: none">
-      Game Over
-    </div>
+
     <script src="js/bomb.js"></script>
     <script src="js/bullet.js"></script>
     <script src="js/enemies.js"></script>

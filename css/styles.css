@@ -1,10 +1,17 @@
+html {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-
   text-align: center;
   background: url(../img/bricks1.jpg) no-repeat;
 }
+
 canvas {
   border: 10px solid rgb(16, 21, 1);
   border-radius: 3%;
@@ -14,8 +21,8 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Bowlby One SC", cursive;
-  color: rgb(243, 255, 5);
+  font-family: "Open Sans", sans-serif;
+  color: white;
 }
 
 h1 {
@@ -70,8 +77,6 @@ button {
   justify-content: center;
   margin-bottom: 20px;
   margin-top: 20px;
-  background: url(../images/User_Interface/PopupBox.png) no-repeat center;
-  background-size: 1310px;
 }
 
 .logo {
@@ -83,7 +88,6 @@ button {
   width: 200px;
 }
 .lives {
-  border-left: 3px solid rgb(243, 255, 5);
   padding: 20px 20px 20px 20px;
   width: 375px;
 }
@@ -103,20 +107,34 @@ button {
 }
 .score {
   width: 200px;
-  border-left: 3px solid rgb(243, 255, 5);
   padding: 20px 20px 20px 20px;
 }
 
 .time {
   width: 200px;
-  border-left: 3px solid rgb(243, 255, 5);
   padding: 20px 20px 20px 20px;
 }
 .text-time,
 .text-score {
   margin-top: 20px;
-  font-family: "Staatliches", cursive;
   font-size: 3.5rem;
-  color: #9b0439f7;
   text-shadow: 2px 2px rgb(16, 21, 1);
+}
+.game-controls {
+  display: block;
+  width: 100%;
+  height: 80px;
+  margin: 0;
+  padding: 0;
+  background-color: gray;
+}
+ul.left-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: white;
+  list-style-type: none;
+  display: inline-block;
 }
