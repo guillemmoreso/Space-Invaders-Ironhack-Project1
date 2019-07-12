@@ -1,11 +1,11 @@
 "use strict";
 class Game {
   constructor(ctx, gameWidth, gameHeight) {
+    this.ctx = ctx;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.enemies = [];
     this.bombs = [];
-    this.ctx = ctx;
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;

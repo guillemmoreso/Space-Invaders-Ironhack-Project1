@@ -1,0 +1,11 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+
+  text-align: center;
+  background: url(../img/bricks1.jpg) no-repeat;
+  background-position-y: -150px;
+}
+canvas {
+  border: 10px solid rgb(16, 21, 1);
+}

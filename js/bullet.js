@@ -3,7 +3,7 @@ class Bullet {
   constructor(x, y, width, height) {
     this.width = width;
     this.height = height;
-    this.x = x; // - this.width / 2;
+    this.x = x;
     this.y = y;
     this.speed = 20;
   }
