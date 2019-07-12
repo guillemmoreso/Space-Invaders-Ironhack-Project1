@@ -9,7 +9,7 @@ class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
-    this.intervalBombing = 60;
+    this.intervalBombing = 860;
     this.gameInterval = undefined;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
     this.mosquitoAttackSound = new Audio("./src/mosquito-attack.wav");
@@ -25,24 +25,51 @@ class Game {
   }
 
   update() {
-    this.counterBombing++;
+    this._counterBombing();
     this.spaceship.update();
+    this._collisionBullets();
+    this._collisionBombs();
+    this._checkCollisionEnemiesWithBottom();
+    this._checkGameStatus();
+    this.draw();
+  }
+  //Solucionar el tema de la pantalla final
+  _checkGameStatus() {
+    if (this.gameOver === true) {
+      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+      this.ctx.font = "45px Comic Sans";
+      this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
+      setTimeout(
+        function() {
+          this.mosquitoPain.play();
+          this.mosquitoPain = undefined;
+        }.bind(this),
+        2500
+      );
+    }
+    if (this.enemies.length === 0) {
+      this.gameWon = true;
+      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+      this.ctx.font = "45px Comic Sans";
+      this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
+      setTimeout(
+        function() {
+          this.gameWinSnores.play();
+          this.gameWinSnores = undefined;
+        }.bind(this),
+        2500
+      );
+    }
+  }
+  _counterBombing() {
+    this.counterBombing++;
     if (this.counterBombing === this.intervalBombing) {
       this._bombing();
       this.counterBombing = 0;
     }
-    this._collisionBullets();
-    this._collisionBombs();
-    this._checkCollisionEnemiesWithBottom();
-    if (this.enemies.length === 0) {
-      this.gameWon = true;
-    }
-    this.draw();
   }
-
   _pauseGame() {
     window.cancelAnimationFrame(this.gameInterval);
-    console.log(this.gameInterval);
   }
 
   draw() {
@@ -213,30 +240,6 @@ class Game {
     this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
     if (this.gameOver === false && this.gameWon === false) {
       this.update();
-    }
-    if (this.gameOver === true) {
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-      this.ctx.font = "45px Comic Sans";
-      this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
-      setTimeout(
-        function() {
-          this.mosquitoPain.play();
-          this.mosquitoPain = undefined;
-        }.bind(this),
-        2500
-      );
-    }
-    if (this.gameWon === true) {
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-      this.ctx.font = "45px Comic Sans";
-      this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
-      setTimeout(
-        function() {
-          this.gameWinSnores.play();
-          this.gameWinSnores = undefined;
-        }.bind(this),
-        2500
-      );
     }
     requestAnimationFrame(this.gameLoop.bind(this));
   }

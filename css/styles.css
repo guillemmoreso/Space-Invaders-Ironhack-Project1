@@ -1,7 +1,5 @@
 html {
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
   margin: 0;
 }
 
@@ -9,7 +7,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   text-align: center;
-  background: url(../img/bricks1.jpg) no-repeat;
+  background: url(../img/background.png);
 }
 
 canvas {
@@ -46,15 +44,13 @@ h4 {
 }
 
 button {
-  font-family: "Bowlby One SC", cursive;
   font-size: 3rem;
-  color: #f3ff05;
+  color: black;
   text-align: center;
-  background: #15334a;
+  background: yellow;
   padding: 20px;
   border-radius: 20px;
-  margin: 50px 5%;
-  border: 8px solid rgb(243, 255, 5);
+  border: 8px solid red;
   width: 300px;
 }
 
@@ -67,8 +63,7 @@ button {
 }
 
 .img-splash img {
-  width: 600px;
-  margin-top: 200px;
+  width: 300px;
 }
 
 .header-score {

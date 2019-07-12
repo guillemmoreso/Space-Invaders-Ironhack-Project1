@@ -13,53 +13,54 @@
     <link rel="shortcut icon" href="./img/enemies.png" type="image/x-icon" />
   </head>
   <body>
-    <div id="splash" class="splash">
-      <div class="img-splash">
-        <img src="./img/favicon.png" alt="Game title " />
+    <main class="container">
+      <div id="splash" class="splash">
+        <div class="img-splash">
+          <img src="./img/favicon.png" alt="Game title " />
+        </div>
+        <button id="start" class="btn-start">START</button>
       </div>
-      <button id="start" class="btn-start">START</button>
-    </div>
-    <div id="game" class="game">
-      <div class="header-score">
-        <div class="lives">
-          <h3>LIVES</h3>
-          <ul>
-            <li>
-              <img id="live01" src="./img/enemies.png" alt="" />
-            </li>
-            <li>
-              <img id="live02" src="./img/enemies.png" alt="" />
-            </li>
-            <li>
-              <img id="live03" src="./img/enemies.png" alt="" />
-            </li>
+      <div id="game" class="game">
+        <div class="header-score">
+          <div class="lives">
+            <h3>LIVES</h3>
+            <ul>
+              <li>
+                <img id="live01" src="./img/enemies.png" alt="" />
+              </li>
+              <li>
+                <img id="live02" src="./img/enemies.png" alt="" />
+              </li>
+              <li>
+                <img id="live03" src="./img/enemies.png" alt="" />
+              </li>
+            </ul>
+          </div>
+          <div class="score">
+            <h3>SCORE</h3>
+            <div class="text-score" id="tex-score">000</div>
+          </div>
+          <div class="time">
+            <h3>TIME</h3>
+            <div class="text-time" id="text-time"></div>
+          </div>
+        </div>
+        <canvas id="gameScreen" width="800" height="600"></canvas>
+        <div class="game-controls">
+          <ul class="left-controls">
+            <li class="controls-label"></li>
+            <li class="left-label"></li>
+            <li class="right-label"></li>
+            <li class="space-label"></li>
+          </ul>
+          <ul class="right-controls">
+            <li class="pause-button"></li>
+            <li class="mute-button"></li>
+            <li class="reset-button"></li>
           </ul>
         </div>
-        <div class="score">
-          <h3>SCORE</h3>
-          <div class="text-score" id="tex-score">000</div>
-        </div>
-        <div class="time">
-          <h3>TIME</h3>
-          <div class="text-time" id="text-time"></div>
-        </div>
       </div>
-      <canvas id="gameScreen" width="1200" height="800"></canvas>
-      <div class="game-controls">
-        <ul class="left-controls">
-          <li class="controls-label"></li>
-          <li class="left-label"></li>
-          <li class="right-label"></li>
-          <li class="space-label"></li>
-        </ul>
-        <ul class="right-controls">
-          <li class="pause-button"></li>
-          <li class="mute-button"></li>
-          <li class="reset-button"></li>
-        </ul>
-      </div>
-    </div>
-
+    </main>
     <script src="js/bomb.js"></script>
     <script src="js/bullet.js"></script>
     <script src="js/enemies.js"></script>
