@@ -8,4 +8,29 @@ body {
 }
 canvas {
   border: 10px solid rgb(16, 21, 1);
+  border-radius: 3%;
+}
+button {
+  font-family: "Bowlby One SC", cursive;
+  font-size: 3rem;
+  color: #f3ff05;
+  text-align: center;
+  background: #15334a;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 50px 5%;
+  border: 8px solid rgb(243, 255, 5);
+  width: 300px;
+}
+.visible {
+  display: block;
+}
+
+.game {
+  display: none;
+}
+
+.img-splash img {
+  width: 600px;
+  margin-top: 200px;
 }
