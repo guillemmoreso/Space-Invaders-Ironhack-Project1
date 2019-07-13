@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mosquito Invaders</title>
     <link
+      href="https://fonts.googleapis.com/css?family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
     />
@@ -24,7 +29,7 @@
       <div id="game" class="game">
         <div class="header-score">
           <div class="lives">
-            <h3>LIVES</h3>
+            <h2>LIVES</h2>
             <ul>
               <li>
                 <img id="live01" src="./img/enemies.png" alt="" />
@@ -38,27 +43,25 @@
             </ul>
           </div>
           <div class="score">
-            <h3>SCORE</h3>
-            <div class="text-score" id="tex-score">000</div>
-          </div>
-          <div class="time">
-            <h3>TIME</h3>
-            <div class="text-time" id="text-time"></div>
+            <h2>SCORE</h2>
+            <div class="text-score" id="text-score">000</div>
           </div>
         </div>
-        <canvas id="gameScreen" width="800" height="600"></canvas>
+        <div class="canvas">
+          <canvas id="gameScreen" width="800" height="600"></canvas>
+        </div>
         <div class="game-controls">
-          <ul class="left-controls">
-            <li class="controls-label"></li>
-            <li class="left-label"></li>
-            <li class="right-label"></li>
-            <li class="space-label"></li>
-          </ul>
-          <ul class="right-controls">
-            <li class="pause-button"></li>
-            <li class="mute-button"></li>
-            <li class="reset-button"></li>
-          </ul>
+          <div class="left-controls">
+            <img src="./img/controls-label.png" alt="" />
+            <img src="./img/left-label.png" alt="" />
+            <img src="./img/right-label.png" alt="" />
+            <img src="./img/space-label.png" alt="" />
+          </div>
+          <div class="right-controls">
+            <img src="./img/pause-button.png" alt="" />
+            <img src="./img/mute-button.png" alt="" />
+            <img src="./img/reset-button.png" alt="" />
+          </div>
         </div>
       </div>
     </main>

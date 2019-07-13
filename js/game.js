@@ -38,6 +38,7 @@ class Game {
     if (this.gameOver === true) {
       this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.font = "45px Comic Sans";
+      this.ctx.fillStyle = "white";
       this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
       setTimeout(
         function() {

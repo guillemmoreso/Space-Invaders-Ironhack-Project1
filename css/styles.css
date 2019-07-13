@@ -4,14 +4,15 @@ html {
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Bangers", cursive;
   font-weight: 300;
 }
 .container {
-  width: 1200%;
+  width: 100%;
   height: 100vh;
   background-image: url("../img/background.png");
   animation: slide 40s linear infinite;
+  background-size: 1200px;
 }
 @keyframes slide {
   from {
@@ -22,42 +23,35 @@ body {
     background-position: 0 1000px;
   }
 }
+.canvas {
+  margin: auto;
+}
 canvas {
-  border: 10px solid rgb(16, 21, 1);
+  border: 10px solid white;
   border-radius: 3%;
+  margin-top: 100px;
+}
+.game {
+  display: flex;
+  flex-direction: column;
 }
 div.splash {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Open Sans", sans-serif;
-  color: white;
+  align-items: center;
 }
 
 h1 {
   font-size: 3rem;
   text-transform: uppercase;
   margin: 10px;
+  color: white;
 }
 
 h2 {
+  color: white;
   font-size: 3rem;
   text-transform: uppercase;
-}
-
-h3 {
-  font-size: 2rem;
-  text-shadow: 2px 2px rgb(16, 21, 1);
-}
-
-h4 {
-  font-weight: 300;
-  font-size: 1.8rem;
 }
 
 button {
@@ -83,42 +77,30 @@ button {
   width: 300px;
   margin: 20px;
 }
-
+.lives {
+  display: flex;
+  flex-direction: row;
+}
 .header-score {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  height: 50px;
 }
 
-.logo {
-  width: 300px;
-  padding-top: 20px;
-}
-
-.logo img {
-  width: 200px;
-}
-.lives {
-  padding: 20px 20px 20px 20px;
-  width: 375px;
-}
 .lives ul {
   list-style-type: none;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
-.lives li {
-  float: left;
-  width: 75px;
-}
+
 .lives img {
-  width: 75px;
+  width: 60px;
 }
-.live-out {
-  filter: grayscale(100%);
-}
+
 .score {
+  display: flex;
+  align-items: center;
   width: 200px;
   padding: 20px 20px 20px 20px;
 }
@@ -131,81 +113,17 @@ button {
 .text-score {
   margin-top: 20px;
   font-size: 3.5rem;
-  text-shadow: 2px 2px rgb(16, 21, 1);
+  color: white;
 }
 .game-controls {
-  display: block;
   width: 100%;
-  height: 80px;
-  margin: 0;
+  height: 30px;
+  margin-top: 20px;
   padding: 0;
-  background-color: gray;
-}
-ul.left-controls {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  color: white;
-  list-style-type: none;
-  display: inline-block;
 }
-ol,
-ul {
-  list-style: none;
-}
-
-ul.left-controls > li {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  vertical-align: middle;
-}
-.controls-label {
-  width: 80px;
-  height: 9px;
-  background: url(../img/controls-label.png) no-repeat;
-}
-.left-label {
-  display: inline-block;
-  width: 13px;
-  height: 11px;
-  background: url(../img/left-label.png) no-repeat;
-}
-.right-label {
-  display: inline-block;
-  width: 12px;
-  height: 11px;
-  background: url(../img/right-label.png) no-repeat;
-}
-.space-label {
-  display: inline-block;
-  width: 64px;
-  height: 18px;
-  background: url(../img/space-label.png) no-repeat;
-}
-ul.right-controls {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  vertical-align: middle;
-}
-.pause-button {
-  width: 121px;
-  height: 52px;
-  display: inline-block;
-  background: url(../img/pause-button.png) no-repeat;
-}
-.mute-button {
-  width: 121px;
-  height: 52px;
-  display: inline-block;
-  background: url(../img/mute-button.png) no-repeat;
-}
-.reset-button {
-  width: 121px;
-  height: 52px;
-  display: inline-block;
-  background: url(../img/reset-button.png) no-repeat;
+.left-controls {
+  margin-top: 15px;
+  margin-right: 50px;
 }
