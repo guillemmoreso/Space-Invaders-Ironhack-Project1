@@ -9,7 +9,7 @@ class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
-    this.intervalBombing = 60;
+    this.intervalBombing = 30;
     this.gameInterval = undefined;
 
     this.soundIsMuted = false;
@@ -36,6 +36,7 @@ class Game {
     this._checkCollisionEnemiesWithBottom();
     this._checkGameStatus();
     this.draw();
+    console.log(this.spaceship.lives);
     document.querySelector("#actual-score").innerHTML = this.spaceship.score;
   }
   //Solucionar el tema de la pantalla final
@@ -205,7 +206,7 @@ class Game {
         bomb.x > this.spaceship.position.x &&
         bomb.x + bomb.width < this.spaceship.position.x + this.spaceship.width
       ) {
-        this.gameOver = true;
+        this.spaceship.removeLife();
       }
     });
   }
@@ -274,9 +275,9 @@ class Game {
     //   if (event) //Mirar com es fa per posar-ho a la pagina inicial
     // });
 
-    // btnPause.addEventListener("click", event => {
-    //   if (event) this.soundIsMuted = true;
-    // });
+    btnPause.addEventListener("click", event => {
+      if (event) this.soundIsMuted = true;
+    });
   }
   gameLoop() {
     this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);

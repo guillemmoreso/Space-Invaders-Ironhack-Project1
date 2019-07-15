@@ -7,8 +7,8 @@ class Enemy {
 
     this.direction = true;
 
-    this.xVelocidad = 2;
-    this.yVelocidad = 2;
+    this.xVelocidad = 4;
+    this.yVelocidad = 4;
     this.image = new Image();
     this.image.src = "./img/enemies.png";
   }

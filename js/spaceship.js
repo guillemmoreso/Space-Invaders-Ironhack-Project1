@@ -6,7 +6,7 @@ class Spaceship {
     this.height = 180;
 
     this.bullets = [];
-    this.lives = 3;
+    this.lives = 30;
     this.score = 0;
 
     this.maxSpeed = 10;
@@ -60,10 +60,9 @@ class Spaceship {
       new Bullet(this.position.x + this.width / 3, this.position.y, 20, 40)
     );
   }
-  removelife() {
+  removeLife() {
     this.lives--;
     document.querySelector(".live-img").remove();
-    return this.lives === 0 ? true : false;
   }
   updateScore() {
     this.score += 100;
