@@ -74,7 +74,7 @@ div.splash {
 .img-splash > img {
   margin: 0 300;
   margin-left: 50px;
-  animation: blink 1.5s;
+  animation: blink 2.5s;
   animation-iteration-count: infinite;
 }
 @keyframes blink {
@@ -90,20 +90,24 @@ div.splash {
 }
 
 .copyright {
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: white;
-  animation-duration: 3s;
+  animation-duration: 5s;
   animation-name: slidein;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 @keyframes slidein {
   from {
-    margin-left: 100%;
+    margin-right: 10%;
     width: 300%;
   }
 
   to {
-    margin-left: 0%;
+    margin-left: 10%;
     width: 100%;
   }
 }
