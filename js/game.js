@@ -240,9 +240,20 @@ class Game {
   }
   _footerButtonActions() {
     let btnPause = document.getElementById("btn-pause");
-    btnPause.addEventListener("click", event => {
+    let btnMute = document.getElementById("btn-mute");
+    let btnReset = document.getElementById("btn-reset");
+
+    btnMute.addEventListener("click", event => {
       if (event) this.soundIsMuted = true;
     });
+
+    // btnReset.addEventListener("click", event => {
+    //   if (event) //Mirar com es fa per posar-ho a la pagina inicial
+    // });
+
+    // btnPause.addEventListener("click", event => {
+    //   if (event) this.soundIsMuted = true;
+    // });
   }
   gameLoop() {
     this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
