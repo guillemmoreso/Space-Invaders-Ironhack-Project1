@@ -21,7 +21,12 @@
     <main class="container">
       <div id="splash" class="splash">
         <div class="img-splash">
-          <audio src="./src/intro-sound.mp3" autoplay loop></audio>
+          <audio
+            id="intro-sound"
+            src="./src/intro-sound.mp3"
+            autoplay
+            loop
+          ></audio>
           <h1>- Mosquito Invaders -</h1>
           <img
             class="splash-picture"
@@ -33,24 +38,35 @@
         <p class="copyright">A Game Created by: Guillem Moreso</p>
       </div>
       <section id="game" class="game">
-        <div class="header-score">
-          <div class="lives">
-            <h2>LIVES :</h2>
-            <ul>
-              <li>
-                <img id="live01" src="./img/enemies.png" alt="" />
-              </li>
-              <li>
-                <img id="live02" src="./img/enemies.png" alt="" />
-              </li>
-              <li>
-                <img id="live03" src="./img/enemies.png" alt="" />
-              </li>
-            </ul>
+        <div id="game-header">
+          <div class="stats">
+            <p>Lives:</p>
+            <img
+              class="live-img"
+              src="./img/enemies.png"
+              width="30"
+              height="30"
+            />
+            <img
+              class="live-img"
+              src="./img/enemies.png"
+              width="30"
+              height="30"
+            />
+            <img
+              class="live-img"
+              src="./img/enemies.png"
+              width="30"
+              height="30"
+            />
           </div>
-          <div class="score">
-            <h2>SCORE :</h2>
-            <div class="text-score" id="text-score">000</div>
+          <div class="stats">
+            <p>Time:</p>
+            <p id="time-counter-numbers">123</p>
+          </div>
+          <div class="stats">
+            <p>Score:</p>
+            <p id="actual-score">123</p>
           </div>
         </div>
         <div class="canvas">
@@ -75,6 +91,19 @@
             </button>
           </div>
         </div>
+      </section>
+      <section id="game-over" class="game-over">
+        <div class="img-splash">
+          <audio src="./src/intro-sound.mp3" autoplay loop></audio>
+          <h1>- Mosquito Invaders -</h1>
+          <img
+            class="splash-picture"
+            src="./img/mosquito-splash.png"
+            alt="Game title "
+          />
+        </div>
+        <button id="start" class="btn-start">START</button>
+        <p class="copyright">A Game Created by: Guillem Moreso</p>
       </section>
     </main>
     <script src="js/bomb.js"></script>

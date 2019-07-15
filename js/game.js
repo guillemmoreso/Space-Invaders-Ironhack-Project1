@@ -9,7 +9,7 @@ class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
-    this.intervalBombing = 60;
+    this.intervalBombing = 69990;
     this.gameInterval = undefined;
 
     this.soundIsMuted = false;
@@ -40,10 +40,18 @@ class Game {
   //Solucionar el tema de la pantalla final
   _checkGameStatus() {
     if (this.gameOver === true) {
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-      this.ctx.font = "45px Comic Sans";
-      this.ctx.fillStyle = "white";
-      this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
+      //Repeated Code
+      let gameVisible = document.getElementById("game");
+      let splashVisible = document.getElementById("splash");
+      let gameOverVisible = document.getElementById("game-over");
+      gameOverVisible.style.display = "block";
+      gameVisible.style.display = "none";
+      splashVisible.style.display = "none";
+
+      // this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+      // this.ctx.font = "45px Comic Sans";
+      // this.ctx.fillStyle = "white";
+      // this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
       setTimeout(
         function() {
           this.mosquitoPain.play();
@@ -51,6 +59,19 @@ class Game {
         }.bind(this),
         2500
       );
+      btnStart.addEventListener("click", function() {
+        gameVisible.style.display = "block";
+        splashVisible.style.display = "none";
+
+        let canvas = document.getElementById("gameScreen");
+        let ctx = canvas.getContext("2d");
+
+        const GAME_WIDTH = 800;
+        const GAME_HEIGHT = 600;
+        const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT); // Starts the new Game instantiating the Game Object
+
+        game.start();
+      });
     }
     if (this.enemies.length === 0) {
       this.gameWon = true;
