@@ -12,6 +12,8 @@ class Game {
     this.intervalBombing = 60;
     this.gameInterval = undefined;
 
+    this.soundIsMuted = false;
+
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
     this.mosquitoAttackSound = new Audio("./src/mosquito-attack.wav");
     this.mosquitoPain = new Audio("./src/mosquitoPain.wav");
@@ -195,7 +197,7 @@ class Game {
         30
       )
     );
-    if (this.mosquitoAttackSound !== undefined) this.mosquitoAttackSound.play();
+    if (this.soundIsMuted === false) this.mosquitoAttackSound.play();
   }
 
   _inputHandler() {
@@ -239,8 +241,7 @@ class Game {
   _footerButtonActions() {
     let btnPause = document.getElementById("btn-pause");
     btnPause.addEventListener("click", event => {
-      if (event) this.mosquitoAttackSound.pause();
-      console.log("hola");
+      if (event) this.soundIsMuted = true;
     });
   }
   gameLoop() {
