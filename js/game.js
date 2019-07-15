@@ -11,6 +11,7 @@ class Game {
     this.counterBombing = 0;
     this.intervalBombing = 60;
     this.gameInterval = undefined;
+
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
     this.mosquitoAttackSound = new Audio("./src/mosquito-attack.wav");
     this.mosquitoPain = new Audio("./src/mosquitoPain.wav");
@@ -22,6 +23,7 @@ class Game {
     this._createEnemies();
     this._inputHandler();
     this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
+    this._footerButtonActions();
   }
 
   update() {
@@ -184,18 +186,16 @@ class Game {
   }
 
   _bombing() {
-    if (Math.random() > 0.1) {
-      let enemyRandoom = Math.floor(Math.random() * this.enemies.length);
-      this.bombs.push(
-        new Bomb(
-          this.enemies[enemyRandoom].x,
-          this.enemies[enemyRandoom].y,
-          30,
-          30
-        )
-      );
-      this.mosquitoAttackSound.play();
-    }
+    let enemyRandoom = Math.floor(Math.random() * this.enemies.length);
+    this.bombs.push(
+      new Bomb(
+        this.enemies[enemyRandoom].x,
+        this.enemies[enemyRandoom].y,
+        30,
+        30
+      )
+    );
+    if (this.mosquitoAttackSound !== undefined) this.mosquitoAttackSound.play();
   }
 
   _inputHandler() {
@@ -236,7 +236,13 @@ class Game {
       }
     });
   }
-
+  _footerButtonActions() {
+    let btnPause = document.getElementById("btn-pause");
+    btnPause.addEventListener("click", event => {
+      if (event) this.mosquitoAttackSound.pause();
+      console.log("hola");
+    });
+  }
   gameLoop() {
     this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
     if (this.gameOver === false && this.gameWon === false) {
