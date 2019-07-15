@@ -9,16 +9,20 @@
       href="https://fonts.googleapis.com/css?family=Bangers&display=swap"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
     />
     <link rel="stylesheet" href="./css/styles.css" />
-    <link rel="shortcut icon" href="./img/enemies.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="./img/mosquito-enemy.png"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <main class="container">
+      <!--Splash Screen-->
       <div id="splash" class="splash">
         <div class="img-splash">
           <audio
@@ -37,38 +41,44 @@
         <button id="start" class="btn-start">START</button>
         <p class="copyright">A Game Created by: Guillem Moreso</p>
       </div>
+
+      <!--Game Screen-->
       <section id="game" class="game">
+        <!--Game Screen Header-->
         <div id="game-header">
           <div class="stats">
             <p>Lives:</p>
             <img
               class="live-img"
-              src="./img/enemies.png"
+              src="./img/mosquito-enemy.png"
               width="30"
               height="30"
             />
             <img
               class="live-img"
-              src="./img/enemies.png"
+              src="./img/mosquito-enemy.png"
               width="30"
               height="30"
             />
             <img
               class="live-img"
-              src="./img/enemies.png"
+              src="./img/mosquito-enemy.png"
               width="30"
               height="30"
             />
           </div>
-
           <div class="stats">
             <p>Score:</p>
             <p id="actual-score"></p>
           </div>
         </div>
+
+        <!--Game Screen Canvas-->
         <div class="canvas">
           <canvas id="gameScreen" width="1200" height="600"></canvas>
         </div>
+
+        <!--Game Screen Footer-->
         <div class="game-controls">
           <div class="left-controls">
             <img src="./img/controls-label.png" alt="" />
@@ -89,6 +99,8 @@
           </div>
         </div>
       </section>
+
+      <!--GameOver Screen-->
       <section id="game-over" class="game-over">
         <div class="img-splash">
           <audio src="./src/intro-sound.mp3" autoplay loop></audio>
@@ -103,6 +115,8 @@
         <p class="copyright">A Game Created by: Guillem Moreso</p>
       </section>
     </main>
+
+    <!--JS Scripts-->
     <script src="js/bomb.js"></script>
     <script src="js/bullet.js"></script>
     <script src="js/enemies.js"></script>

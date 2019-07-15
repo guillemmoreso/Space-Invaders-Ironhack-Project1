@@ -4,8 +4,8 @@ class Game {
     this.ctx = ctx;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.enemies = [];
-    this.bombs = [];
+    this.mosquitoes = [];
+    this.greenVenoms = [];
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
@@ -21,7 +21,7 @@ class Game {
   }
 
   start() {
-    this.spaceship = new Spaceship(this);
+    this.insecticide = new Insecticide(this);
     this._createEnemies();
     this._inputHandler();
     this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
@@ -30,14 +30,14 @@ class Game {
 
   update() {
     this._counterBombing();
-    this.spaceship.update();
+    this.insecticide.update();
     this._collisionBullets();
     this._collisionBombs();
     this._checkCollisionEnemiesWithBottom();
     this._checkGameStatus();
     this.draw();
-    console.log(this.spaceship.lives);
-    document.querySelector("#actual-score").innerHTML = this.spaceship.score;
+    console.log(this.insecticide.lives);
+    document.querySelector("#actual-score").innerHTML = this.insecticide.score;
   }
   //Solucionar el tema de la pantalla final
   _checkGameStatus() {
@@ -75,7 +75,7 @@ class Game {
         game.start();
       });
     }
-    if (this.enemies.length === 0) {
+    if (this.mosquitoes.length === 0) {
       this.gameWon = true;
       this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.font = "45px Comic Sans";
@@ -101,50 +101,56 @@ class Game {
   }
 
   draw() {
-    this.spaceship.draw(this.ctx);
+    this.insecticide.draw(this.ctx);
     this._drawEnemies();
     this._drawBullet(this.ctx);
     this._drawEnemiesBombs(this.ctx);
   }
 
   _checkCollisionEnemiesWithBottom() {
-    this.enemies.forEach(enemy => {
-      if (enemy.y >= this.gameHeight) {
+    this.mosquitoes.forEach(mosquito => {
+      if (mosquito.y >= this.gameHeight) {
         this.gameOver = true;
       }
     });
   }
 
   _drawEnemies() {
-    this.enemies.forEach(enemy => {
-      if (enemy.direction) {
-        enemy.moveRight();
+    this.mosquitoes.forEach(mosquito => {
+      if (mosquito.direction) {
+        mosquito.moveRight();
       } else {
-        enemy.moveLeft();
+        mosquito.moveLeft();
       }
 
-      if (enemy.x > this.gameWidth - 30 || enemy.x < 0) {
+      if (mosquito.x > this.gameWidth - 30 || mosquito.x < 0) {
         this._changeDirection();
       }
-      this.ctx.drawImage(enemy.image, enemy.x, enemy.y, enemy.size, enemy.size);
+      this.ctx.drawImage(
+        mosquito.image,
+        mosquito.x,
+        mosquito.y,
+        mosquito.size,
+        mosquito.size
+      );
     });
   }
 
   _changeDirection() {
-    // this.enemies.forEach(enemy => {
-    //   enemy.y += 40;
-    //   enemy.direction = !enemy.direction;
+    // this.mosquitoes.forEach(mosquito => {
+    //   mosquito.y += 40;
+    //   mosquito.direction = !mosquito.direction;
     // });
-    for (let i = 0; i < this.enemies.length; i++) {
-      this.enemies[i].y += 40;
-      this.enemies[i].direction = !this.enemies[i].direction;
+    for (let i = 0; i < this.mosquitoes.length; i++) {
+      this.mosquitoes[i].y += 40;
+      this.mosquitoes[i].direction = !this.mosquitoes[i].direction;
     }
   }
 
   _drawBullet() {
-    this.spaceship.bullets.forEach((bullet, index) => {
+    this.insecticide.bullets.forEach((bullet, index) => {
       if (bullet.y < 0) {
-        this.spaceship.bullets.splice(index, 1);
+        this.insecticide.bullets.splice(index, 1);
       } else {
         bullet.update();
         bullet.draw(this.ctx);
@@ -153,13 +159,13 @@ class Game {
   }
 
   _drawEnemiesBombs() {
-    this.bombs.forEach((bomb, index) => {
-      if (bomb.y >= this.gameHeight) {
-        this.bombs.splice(index, 1);
+    this.greenVenoms.forEach((venom, index) => {
+      if (venom.y >= this.gameHeight) {
+        this.greenVenoms.splice(index, 1);
       } else {
         //No estoy pillando las referencias
-        bomb.update();
-        bomb.draw(this.ctx);
+        venom.update();
+        venom.draw(this.ctx);
       }
     });
   }
@@ -168,55 +174,56 @@ class Game {
     for (let i = 0; i < 30; i++) {
       let x = 20 + (i % 8) * 60;
       let y = 20 + (i % 3) * 60;
-      this.enemies.push(new Enemy(x, y, 40));
+      this.mosquitoes.push(new Mosquito(x, y, 40));
     }
   }
 
   _collisionBullets() {
-    this.spaceship.bullets.forEach((bullet, indexBullet) => {
-      this.enemies.forEach(enemy => {
+    this.insecticide.bullets.forEach((bullet, indexBullet) => {
+      this.mosquitoes.forEach(mosquito => {
         if (
-          bullet.y < enemy.y + enemy.size &&
-          bullet.y > enemy.y &&
-          bullet.x > enemy.x &&
-          bullet.x + bullet.width < enemy.x + enemy.size
+          bullet.y < mosquito.y + mosquito.size &&
+          bullet.y > mosquito.y &&
+          bullet.x > mosquito.x &&
+          bullet.x + bullet.width < mosquito.x + mosquito.size
         ) {
           //Corregir
           setTimeout(() => {
-            let currentIndex = this.enemies.indexOf(enemy);
-            this.enemies.splice(currentIndex, 1);
+            let currentIndex = this.mosquitoes.indexOf(mosquito);
+            this.mosquitoes.splice(currentIndex, 1);
           }, 0);
-          this.spaceship.bullets.splice(indexBullet, 1);
-          this.spaceship.updateScore();
+          this.insecticide.bullets.splice(indexBullet, 1);
+          this.insecticide.updateScore();
         }
       });
     });
 
-    this.enemies.forEach(element => {
-      if (element.y + element.size / 2 > this.spaceship.y) {
+    this.mosquitoes.forEach(element => {
+      if (element.y + element.size / 2 > this.insecticide.y) {
         this.gameOver = true;
       }
     });
   }
   _collisionBombs() {
-    this.bombs.forEach(bomb => {
+    this.greenVenoms.forEach(venom => {
       if (
-        bomb.y < this.spaceship.position.y + this.spaceship.height &&
-        bomb.y > this.spaceship.position.y &&
-        bomb.x > this.spaceship.position.x &&
-        bomb.x + bomb.width < this.spaceship.position.x + this.spaceship.width
+        venom.y < this.insecticide.position.y + this.insecticide.height &&
+        venom.y > this.insecticide.position.y &&
+        venom.x > this.insecticide.position.x &&
+        venom.x + venom.width <
+          this.insecticide.position.x + this.insecticide.width
       ) {
-        this.spaceship.removeLife();
+        this.insecticide.removeLife();
       }
     });
   }
 
   _bombing() {
-    let enemyRandoom = Math.floor(Math.random() * this.enemies.length);
-    this.bombs.push(
+    let mosquitoRandoom = Math.floor(Math.random() * this.mosquitoes.length);
+    this.greenVenoms.push(
       new Bomb(
-        this.enemies[enemyRandoom].x,
-        this.enemies[enemyRandoom].y,
+        this.mosquitoes[mosquitoRandoom].x,
+        this.mosquitoes[mosquitoRandoom].y,
         30,
         30
       )
@@ -228,25 +235,25 @@ class Game {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
         case 37:
-          this.spaceship.moveLeft();
+          this.insecticide.moveLeft();
           break;
 
         case 39:
-          this.spaceship.moveRight();
+          this.insecticide.moveRight();
           break;
       }
     });
     document.addEventListener("keyup", event => {
       switch (event.keyCode) {
         case 37:
-          if (this.spaceship.speed < 0) {
-            this.spaceship.stop();
+          if (this.insecticide.speed < 0) {
+            this.insecticide.stop();
           }
           break;
 
         case 39:
-          if (this.spaceship.speed > 0) {
-            this.spaceship.stop();
+          if (this.insecticide.speed > 0) {
+            this.insecticide.stop();
           }
           break;
       }
@@ -254,7 +261,7 @@ class Game {
 
     document.addEventListener("keyup", event => {
       if (event.keyCode === 32) {
-        this.spaceship.attack();
+        this.insecticide.attack();
         this.spraySound.play();
       }
       if (event.keyCode === 80) {

@@ -1,5 +1,5 @@
 "use strict";
-class Spaceship {
+class Insecticide {
   constructor(game) {
     this.gameWidth = game.gameWidth;
     this.width = 80;
@@ -13,7 +13,7 @@ class Spaceship {
     this.speed = 0;
 
     this.position = {
-      x: game.gameWidth / 2 - this.width / 2, //center Spaceship in the Screen
+      x: game.gameWidth / 2 - this.width / 2,
       y: game.gameHeight - this.height
     };
   }

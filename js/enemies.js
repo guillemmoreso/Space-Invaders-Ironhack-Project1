@@ -1,5 +1,5 @@
 "use strict";
-class Enemy {
+class Mosquito {
   constructor(x, y, size) {
     this.x = x;
     this.y = y;
@@ -10,7 +10,7 @@ class Enemy {
     this.xVelocidad = 4;
     this.yVelocidad = 4;
     this.image = new Image();
-    this.image.src = "./img/enemies.png";
+    this.image.src = "./img/mosquito-enemy.png";
   }
 
   moveRight() {
