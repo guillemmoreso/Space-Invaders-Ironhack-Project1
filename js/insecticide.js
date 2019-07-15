@@ -5,7 +5,7 @@ class Insecticide {
     this.width = 80;
     this.height = 180;
 
-    this.bullets = [];
+    this.sprays = [];
     this.lives = 30;
     this.score = 0;
 
@@ -56,8 +56,8 @@ class Insecticide {
     } //Avoid getting out the box on the right side
   }
   attack() {
-    this.bullets.push(
-      new Bullet(this.position.x + this.width / 3, this.position.y, 20, 40)
+    this.sprays.push(
+      new Spray(this.position.x + this.width / 3, this.position.y, 20, 40)
     );
   }
   removeLife() {
@@ -66,6 +66,5 @@ class Insecticide {
   }
   updateScore() {
     this.score += 100;
-    console.log(this.score);
   }
 }

@@ -1,5 +1,5 @@
 "use strict";
-class Bullet {
+class Spray {
   constructor(x, y, width, height) {
     this.width = width;
     this.height = height;

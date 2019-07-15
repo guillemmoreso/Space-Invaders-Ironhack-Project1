@@ -1,5 +1,5 @@
 "use strict";
-class Bomb {
+class Venom {
   constructor(x, y, width, height) {
     this.width = width;
     this.height = height;

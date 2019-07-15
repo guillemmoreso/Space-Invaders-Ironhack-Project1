@@ -41,6 +41,7 @@ class Game {
         }.bind(this),
         2500
       );
+
       btnStart.addEventListener("click", function() {
         gameVisible.style.display = "block";
         splashVisible.style.display = "none";
@@ -80,18 +81,20 @@ class Game {
     this.insecticide = new Insecticide(this);
     this._createMosquitoes();
     this._inputHandler();
-    this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
     this._footerButtonActions();
+    //WIP function
+    this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   update() {
-    this._counterVenom();
+    this._checkGameStatus();
+    this.draw();
     this.insecticide.update();
+
+    this._counterVenom();
     this._collisionBullets();
     this._collisionVenom();
     this.__checkCollisionMosquitoesWithBottom();
-    this._checkGameStatus();
-    this.draw();
     document.querySelector("#actual-score").innerHTML = this.insecticide.score;
   }
 
@@ -107,12 +110,12 @@ class Game {
 
   draw() {
     this.insecticide.draw(this.ctx);
-    this._drawEnemies();
-    this._drawBullet(this.ctx);
-    this._drawEnemiesBombs(this.ctx);
+    this._drawMosquitoes();
+    this._drawSprays(this.ctx);
+    this._drawGreenVenoms(this.ctx);
   }
 
-  _drawEnemies() {
+  _drawMosquitoes() {
     this.mosquitoes.forEach(mosquito => {
       if (mosquito.direction) {
         mosquito.moveRight();
@@ -121,7 +124,7 @@ class Game {
       }
 
       if (mosquito.x > this.gameWidth - 30 || mosquito.x < 0) {
-        this._changeDirection();
+        this._changeMosquitoesDirection();
       }
       this.ctx.drawImage(
         mosquito.image,
@@ -133,18 +136,18 @@ class Game {
     });
   }
 
-  _drawBullet() {
-    this.insecticide.bullets.forEach((bullet, index) => {
-      if (bullet.y < 0) {
-        this.insecticide.bullets.splice(index, 1);
+  _drawSprays() {
+    this.insecticide.sprays.forEach((spray, index) => {
+      if (spray.y < 0) {
+        this.insecticide.sprays.splice(index, 1);
       } else {
-        bullet.update();
-        bullet.draw(this.ctx);
+        spray.update();
+        spray.draw(this.ctx);
       }
     });
   }
 
-  _drawEnemiesBombs() {
+  _drawGreenVenoms() {
     this.greenVenoms.forEach((venom, index) => {
       if (venom.y >= this.gameHeight) {
         this.greenVenoms.splice(index, 1);
@@ -155,8 +158,6 @@ class Game {
       }
     });
   }
-
-  // INSECTICIDE FEATURES
 
   // MOSQUITOES FEATURES
 
@@ -171,15 +172,15 @@ class Game {
   _counterVenom() {
     this.counterVenom++;
     if (this.counterVenom === this.intervalVenom) {
-      this._bombing();
+      this._venom();
       this.counterVenom = 0;
     }
   }
 
-  _bombing() {
+  _venom() {
     let mosquitoRandoom = Math.floor(Math.random() * this.mosquitoes.length);
     this.greenVenoms.push(
-      new Bomb(
+      new Venom(
         this.mosquitoes[mosquitoRandoom].x,
         this.mosquitoes[mosquitoRandoom].y,
         30,
@@ -189,7 +190,7 @@ class Game {
     if (this.soundIsMuted === false) this.mosquitoAttackSound.play();
   }
 
-  _changeDirection() {
+  _changeMosquitoesDirection() {
     for (let i = 0; i < this.mosquitoes.length; i++) {
       this.mosquitoes[i].y += 40;
       this.mosquitoes[i].direction = !this.mosquitoes[i].direction;
@@ -206,20 +207,20 @@ class Game {
   }
 
   _collisionBullets() {
-    this.insecticide.bullets.forEach((bullet, indexBullet) => {
+    this.insecticide.sprays.forEach((spray, indexSpray) => {
       this.mosquitoes.forEach(mosquito => {
         if (
-          bullet.y < mosquito.y + mosquito.size &&
-          bullet.y > mosquito.y &&
-          bullet.x > mosquito.x &&
-          bullet.x + bullet.width < mosquito.x + mosquito.size
+          spray.y < mosquito.y + mosquito.size &&
+          spray.y > mosquito.y &&
+          spray.x > mosquito.x &&
+          spray.x + spray.width < mosquito.x + mosquito.size
         ) {
           //Corregir
           setTimeout(() => {
             let currentIndex = this.mosquitoes.indexOf(mosquito);
             this.mosquitoes.splice(currentIndex, 1);
           }, 0);
-          this.insecticide.bullets.splice(indexBullet, 1);
+          this.insecticide.sprays.splice(indexSpray, 1);
           this.insecticide.updateScore();
         }
       });
