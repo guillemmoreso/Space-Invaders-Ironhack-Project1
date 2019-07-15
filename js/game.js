@@ -4,42 +4,26 @@ class Game {
     this.ctx = ctx;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
+
     this.mosquitoes = [];
     this.greenVenoms = [];
+
+    this.gameInterval = undefined;
     this.gameOver = false;
     this.gameWon = false;
-    this.counterBombing = 0;
-    this.intervalBombing = 30;
-    this.gameInterval = undefined;
+
+    this.counterVenom = 0;
+    this.intervalVenom = 30;
 
     this.soundIsMuted = false;
-
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
     this.mosquitoAttackSound = new Audio("./src/mosquito-attack.wav");
     this.mosquitoPain = new Audio("./src/mosquitoPain.wav");
     this.gameWinSnores = new Audio("./src/snores.wav");
   }
 
-  start() {
-    this.insecticide = new Insecticide(this);
-    this._createEnemies();
-    this._inputHandler();
-    this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
-    this._footerButtonActions();
-  }
+  // GAME STATUS
 
-  update() {
-    this._counterBombing();
-    this.insecticide.update();
-    this._collisionBullets();
-    this._collisionBombs();
-    this._checkCollisionEnemiesWithBottom();
-    this._checkGameStatus();
-    this.draw();
-    console.log(this.insecticide.lives);
-    document.querySelector("#actual-score").innerHTML = this.insecticide.score;
-  }
-  //Solucionar el tema de la pantalla final
   _checkGameStatus() {
     if (this.gameOver === true) {
       //Repeated Code
@@ -50,10 +34,6 @@ class Game {
       gameVisible.style.display = "none";
       splashVisible.style.display = "none";
 
-      // this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-      // this.ctx.font = "45px Comic Sans";
-      // this.ctx.fillStyle = "white";
-      // this.ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
       setTimeout(
         function() {
           this.mosquitoPain.play();
@@ -70,7 +50,7 @@ class Game {
 
         const GAME_WIDTH = 800;
         const GAME_HEIGHT = 600;
-        const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT); // Starts the new Game instantiating the Game Object
+        const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT);
 
         game.start();
       });
@@ -89,30 +69,47 @@ class Game {
       );
     }
   }
-  _counterBombing() {
-    this.counterBombing++;
-    if (this.counterBombing === this.intervalBombing) {
-      this._bombing();
-      this.counterBombing = 0;
-    }
-  }
+
   _pauseGame() {
     window.cancelAnimationFrame(this.gameInterval);
   }
+
+  // START UPDATE & LOOP
+
+  start() {
+    this.insecticide = new Insecticide(this);
+    this._createMosquitoes();
+    this._inputHandler();
+    this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
+    this._footerButtonActions();
+  }
+
+  update() {
+    this._counterVenom();
+    this.insecticide.update();
+    this._collisionBullets();
+    this._collisionVenom();
+    this.__checkCollisionMosquitoesWithBottom();
+    this._checkGameStatus();
+    this.draw();
+    document.querySelector("#actual-score").innerHTML = this.insecticide.score;
+  }
+
+  gameLoop() {
+    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+    if (this.gameOver === false && this.gameWon === false) {
+      this.update();
+    }
+    requestAnimationFrame(this.gameLoop.bind(this));
+  }
+
+  // DRAW
 
   draw() {
     this.insecticide.draw(this.ctx);
     this._drawEnemies();
     this._drawBullet(this.ctx);
     this._drawEnemiesBombs(this.ctx);
-  }
-
-  _checkCollisionEnemiesWithBottom() {
-    this.mosquitoes.forEach(mosquito => {
-      if (mosquito.y >= this.gameHeight) {
-        this.gameOver = true;
-      }
-    });
   }
 
   _drawEnemies() {
@@ -134,17 +131,6 @@ class Game {
         mosquito.size
       );
     });
-  }
-
-  _changeDirection() {
-    // this.mosquitoes.forEach(mosquito => {
-    //   mosquito.y += 40;
-    //   mosquito.direction = !mosquito.direction;
-    // });
-    for (let i = 0; i < this.mosquitoes.length; i++) {
-      this.mosquitoes[i].y += 40;
-      this.mosquitoes[i].direction = !this.mosquitoes[i].direction;
-    }
   }
 
   _drawBullet() {
@@ -170,12 +156,53 @@ class Game {
     });
   }
 
-  _createEnemies() {
+  // INSECTICIDE FEATURES
+
+  // MOSQUITOES FEATURES
+
+  _createMosquitoes() {
     for (let i = 0; i < 30; i++) {
       let x = 20 + (i % 8) * 60;
       let y = 20 + (i % 3) * 60;
       this.mosquitoes.push(new Mosquito(x, y, 40));
     }
+  }
+
+  _counterVenom() {
+    this.counterVenom++;
+    if (this.counterVenom === this.intervalVenom) {
+      this._bombing();
+      this.counterVenom = 0;
+    }
+  }
+
+  _bombing() {
+    let mosquitoRandoom = Math.floor(Math.random() * this.mosquitoes.length);
+    this.greenVenoms.push(
+      new Bomb(
+        this.mosquitoes[mosquitoRandoom].x,
+        this.mosquitoes[mosquitoRandoom].y,
+        30,
+        30
+      )
+    );
+    if (this.soundIsMuted === false) this.mosquitoAttackSound.play();
+  }
+
+  _changeDirection() {
+    for (let i = 0; i < this.mosquitoes.length; i++) {
+      this.mosquitoes[i].y += 40;
+      this.mosquitoes[i].direction = !this.mosquitoes[i].direction;
+    }
+  }
+  // COLLISIONS
+
+  __checkCollisionMosquitoesWithBottom() {
+    this.mosquitoes.forEach(mosquito => {
+      if (mosquito.y >= this.gameHeight) {
+        this.gameOver = true;
+      }
+    });
   }
 
   _collisionBullets() {
@@ -204,7 +231,7 @@ class Game {
       }
     });
   }
-  _collisionBombs() {
+  _collisionVenom() {
     this.greenVenoms.forEach(venom => {
       if (
         venom.y < this.insecticide.position.y + this.insecticide.height &&
@@ -218,18 +245,7 @@ class Game {
     });
   }
 
-  _bombing() {
-    let mosquitoRandoom = Math.floor(Math.random() * this.mosquitoes.length);
-    this.greenVenoms.push(
-      new Bomb(
-        this.mosquitoes[mosquitoRandoom].x,
-        this.mosquitoes[mosquitoRandoom].y,
-        30,
-        30
-      )
-    );
-    if (this.soundIsMuted === false) this.mosquitoAttackSound.play();
-  }
+  // KEYBOARD FUNCTIONS
 
   _inputHandler() {
     document.addEventListener("keydown", event => {
@@ -269,6 +285,7 @@ class Game {
       }
     });
   }
+
   _footerButtonActions() {
     let btnPause = document.getElementById("btn-pause");
     let btnMute = document.getElementById("btn-mute");
@@ -285,12 +302,5 @@ class Game {
     btnPause.addEventListener("click", event => {
       if (event) this.soundIsMuted = true;
     });
-  }
-  gameLoop() {
-    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-    if (this.gameOver === false && this.gameWon === false) {
-      this.update();
-    }
-    requestAnimationFrame(this.gameLoop.bind(this));
   }
 }
