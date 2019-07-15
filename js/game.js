@@ -36,6 +36,7 @@ class Game {
     this._checkCollisionEnemiesWithBottom();
     this._checkGameStatus();
     this.draw();
+    document.querySelector("#actual-score").innerHTML = this.spaceship.score;
   }
   //Solucionar el tema de la pantalla final
   _checkGameStatus() {
@@ -185,6 +186,7 @@ class Game {
             this.enemies.splice(currentIndex, 1);
           }, 0);
           this.spaceship.bullets.splice(indexBullet, 1);
+          this.spaceship.updateScore();
         }
       });
     });

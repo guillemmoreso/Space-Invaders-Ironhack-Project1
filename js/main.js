@@ -9,6 +9,7 @@ window.onload = function() {
   btnStart.addEventListener("click", function() {
     gameVisible.style.display = "block";
     splashVisible.style.display = "none";
+
     introSound.remove();
 
     let canvas = document.getElementById("gameScreen");
