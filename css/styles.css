@@ -95,7 +95,7 @@ div.splash {
   flex-direction: column;
   align-items: center;
   color: white;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-name: slidein;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -158,6 +158,7 @@ canvas {
   margin-top: 15px;
   margin-right: 50px;
 }
+
 .right-controls button {
   background: none;
   border: none;

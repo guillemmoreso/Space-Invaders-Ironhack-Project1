@@ -3,7 +3,7 @@ class Spaceship {
   constructor(game) {
     this.gameWidth = game.gameWidth;
     this.width = 80;
-    this.height = 150;
+    this.height = 180;
 
     this.bullets = [];
 

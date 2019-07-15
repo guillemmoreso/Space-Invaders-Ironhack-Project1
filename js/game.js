@@ -9,7 +9,7 @@ class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.counterBombing = 0;
-    this.intervalBombing = 69990;
+    this.intervalBombing = 60;
     this.gameInterval = undefined;
 
     this.soundIsMuted = false;
@@ -121,7 +121,7 @@ class Game {
         enemy.moveLeft();
       }
 
-      if (enemy.x > this.gameWidth || enemy.x < 0) {
+      if (enemy.x > this.gameWidth - 30 || enemy.x < 0) {
         this._changeDirection();
       }
       this.ctx.drawImage(enemy.image, enemy.x, enemy.y, enemy.size, enemy.size);
