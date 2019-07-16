@@ -9,6 +9,7 @@ class Game {
     this.greenVenoms = [];
 
     this.gameInterval = undefined;
+    this.pause = false;
 
     this.gameOver = gameOver;
     this.gameWon = false;
@@ -27,12 +28,19 @@ class Game {
 
   _checkStatus() {
     // if (this.gameWon) {
-
     // }
     // if (this.gameOver) {
     // }
-    console.log("pause");
+  }
+
+  _pauseGame() {
+    this.pause = true;
     window.cancelAnimationFrame(this.gameInterval);
+  }
+
+  _restartGame() {
+    this.pause = false;
+    this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
   }
 
   // START UPDATE & LOOP
@@ -304,8 +312,11 @@ class Game {
         if (this.soundIsMuted === false) this.spraySound.play();
       }
       if (event.keyCode === 80) {
-        // this.status = "paused";
-        this._checkStatus();
+        if (this.pause === false) {
+          this._pauseGame();
+        } else {
+          this._restartGame();
+        }
       }
     });
   }
