@@ -18,6 +18,7 @@ class Insecticide {
     };
   }
 
+  // INSECTICIDE MOVEMENTS
   moveLeft() {
     this.speed = -this.maxSpeed;
   }

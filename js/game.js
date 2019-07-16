@@ -13,7 +13,7 @@ class Game {
     this.gameWon = false;
 
     this.counterVenom = 0;
-    this.intervalVenom = 30;
+    this.intervalVenom = 9960;
 
     this.soundIsMuted = false;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
@@ -92,7 +92,7 @@ class Game {
     this.insecticide.update();
 
     this._counterVenom();
-    this._collisionBullets();
+    this._collisionSprays();
     this._collisionVenom();
     this.__checkCollisionMosquitoesWithBottom();
     document.querySelector("#actual-score").innerHTML = this.insecticide.score;
@@ -110,10 +110,23 @@ class Game {
 
   draw() {
     this.insecticide.draw(this.ctx);
+    // this._drawInsecticide(this.ctx);
     this._drawMosquitoes();
     this._drawSprays(this.ctx);
     this._drawGreenVenoms(this.ctx);
   }
+
+  // _drawInsecticide() {
+  //   this.image = new Image();
+  //   this.image.src = "./img/spray.png";
+  //   this.ctx.drawImage(
+  //     this.insecticide.image,
+  //     this.insecticide.position.x,
+  //     this.insecticide.position.y,
+  //     this.insecticide.width,
+  //     this.insecticide.height
+  //   );
+  // }
 
   _drawMosquitoes() {
     this.mosquitoes.forEach(mosquito => {
@@ -152,7 +165,6 @@ class Game {
       if (venom.y >= this.gameHeight) {
         this.greenVenoms.splice(index, 1);
       } else {
-        //No estoy pillando las referencias
         venom.update();
         venom.draw(this.ctx);
       }
@@ -200,13 +212,13 @@ class Game {
 
   __checkCollisionMosquitoesWithBottom() {
     this.mosquitoes.forEach(mosquito => {
-      if (mosquito.y >= this.gameHeight) {
+      if (mosquito.y >= this.insecticide.position.y) {
         this.gameOver = true;
       }
     });
   }
 
-  _collisionBullets() {
+  _collisionSprays() {
     this.insecticide.sprays.forEach((spray, indexSpray) => {
       this.mosquitoes.forEach(mosquito => {
         if (
