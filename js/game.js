@@ -9,9 +9,10 @@ class Game {
     this.greenVenoms = [];
 
     this.gameInterval = undefined;
-    this.gameOver = false;
-    this.gameWon = false;
     this.status = undefined;
+
+    // this.gameOver = false;
+    // this.gameWon = false;
 
     this.counterVenom = 0;
     this.intervalVenom = 9960;
@@ -24,6 +25,7 @@ class Game {
   }
 
   // GAME STATUS
+
   _checkStatus() {
     switch (this.status) {
       case "running":
@@ -31,53 +33,6 @@ class Game {
         break;
       case "paused":
         break;
-    }
-  }
-
-  _checkGameStatus() {
-    if (this.gameOver === true) {
-      //Repeated Code
-      let gameVisible = document.getElementById("game");
-      let splashVisible = document.getElementById("splash");
-      let gameOverVisible = document.getElementById("game-over");
-      gameOverVisible.style.display = "block";
-      gameVisible.style.display = "none";
-      splashVisible.style.display = "none";
-
-      setTimeout(
-        function() {
-          this.mosquitoPain.play();
-          this.mosquitoPain = undefined;
-        }.bind(this),
-        2500
-      );
-
-      btnStart.addEventListener("click", function() {
-        gameVisible.style.display = "block";
-        splashVisible.style.display = "none";
-
-        let canvas = document.getElementById("gameScreen");
-        let ctx = canvas.getContext("2d");
-
-        const GAME_WIDTH = 800;
-        const GAME_HEIGHT = 600;
-        const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT);
-
-        game.start();
-      });
-    }
-    if (this.mosquitoes.length === 0) {
-      this.gameWon = true;
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-      this.ctx.font = "45px Comic Sans";
-      this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
-      setTimeout(
-        function() {
-          this.gameWinSnores.play();
-          this.gameWinSnores = undefined;
-        }.bind(this),
-        2500
-      );
     }
   }
 
@@ -92,31 +47,32 @@ class Game {
     this._createMosquitoes();
     this._inputHandler();
     this._footerButtonActions();
-    //WIP function
+
     this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
   }
-
   update() {
-    this._checkGameStatus();
+    this._checkStatus();
+    this._clear();
     this.draw();
     this.insecticide.update();
 
     this._counterVenom();
     this._collisionSprays();
     this._collisionVenom();
-    this.__checkCollisionMosquitoesWithBottom();
-    document.querySelector("#actual-score").innerHTML = this.insecticide.score;
+    this._checkCollisionMosquitoesWithBottom();
+    this._gameScoring();
   }
 
   gameLoop() {
-    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-    if (this.gameOver === false && this.gameWon === false) {
-      this.update();
-    }
+    this.update();
     requestAnimationFrame(this.gameLoop.bind(this));
   }
 
-  // DRAW
+  // CLEAR & DRAW
+
+  _clear() {
+    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+  }
 
   draw() {
     this.insecticide.draw(this.ctx);
@@ -218,9 +174,27 @@ class Game {
       this.mosquitoes[i].direction = !this.mosquitoes[i].direction;
     }
   }
+
+  _mosquitoArmyIsDead() {
+    if (this.mosquitoes.length === 0) {
+      this.gameWon = true;
+      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+      this.ctx.font = "45px Comic Sans";
+      this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
+      setTimeout(
+        function() {
+          this.gameWinSnores.play();
+          this.gameWinSnores = undefined;
+        }.bind(this),
+        2500
+      );
+    }
+    console.log("hi");
+  }
+
   // COLLISIONS
 
-  __checkCollisionMosquitoesWithBottom() {
+  _checkCollisionMosquitoesWithBottom() {
     this.mosquitoes.forEach(mosquito => {
       if (mosquito.y >= this.insecticide.position.y) {
         this.gameOver = true;
@@ -325,5 +299,11 @@ class Game {
     btnPause.addEventListener("click", event => {
       if (event) this.soundIsMuted = true;
     });
+  }
+
+  // EXTRA FEATURES
+
+  _gameScoring() {
+    document.querySelector("#actual-score").innerHTML = this.insecticide.score;
   }
 }
