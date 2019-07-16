@@ -42,17 +42,17 @@ class Insecticide {
     }
   }
   //Refactor in GAME
-  draw(ctx) {
-    this.image = new Image();
-    this.image.src = "./img/spray.png";
-    ctx.drawImage(
-      this.image,
-      this.position.x,
-      this.position.y,
-      this.width,
-      this.height
-    );
-  }
+  // draw(ctx) {
+  //   this.image = new Image();
+  //   this.image.src = "./img/spray.png";
+  //   ctx.drawImage(
+  //     this.image,
+  //     this.position.x,
+  //     this.position.y,
+  //     this.width,
+  //     this.height
+  //   );
+  // }
 
   attack() {
     this.sprays.push(

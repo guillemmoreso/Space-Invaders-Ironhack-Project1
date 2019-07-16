@@ -26,10 +26,13 @@ class Game {
   // GAME STATUS
 
   _checkStatus() {
-    if (this.gameWon) {
-    }
-    if (this.gameOver) {
-    }
+    // if (this.gameWon) {
+
+    // }
+    // if (this.gameOver) {
+    // }
+    console.log("pause");
+    window.cancelAnimationFrame(this.gameInterval);
   }
 
   // START UPDATE & LOOP
@@ -39,15 +42,15 @@ class Game {
     this._createMosquitoes();
     this._inputHandler();
     this._footerButtonActions();
+    this._update();
 
-    this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
-    // this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
+    // this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   _update() {
-    this._checkStatus();
+    this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
+    // this._checkStatus();
     this._clear();
-    this.draw();
     this.insecticide.insecticideMovementConditions();
 
     this._counterVenom();
@@ -55,13 +58,13 @@ class Game {
     this._collisionVenom();
     this._checkCollisionMosquitoesWithBottom();
     this._gameScoring();
-    // requestAnimationFrame(this._update.bind(this));
+    this.draw();
   }
 
-  gameLoop() {
-    this._update();
-    requestAnimationFrame(this.gameLoop.bind(this));
-  }
+  // gameLoop() {
+  //   this._update();
+  //   requestAnimationFrame(this.gameLoop.bind(this));
+  // }
 
   // CLEAR & DRAW
 
@@ -70,46 +73,65 @@ class Game {
   }
 
   draw() {
-    this.insecticide.draw(this.ctx);
-    // this._drawInsecticide();
+    // this.insecticide.draw(this.ctx);
+    this._drawInsecticide();
     this._drawMosquitoes();
     this._drawSprays(this.ctx);
     this._drawGreenVenoms(this.ctx);
   }
 
-  // _drawInsecticide() {
-  //   this.insecticide.forEach(() => {
-  //     this.image = new Image();
-  //     this.image.src = "./img/spray.png";
-  //     this.ctx.drawImage(
-  //       this.insecticide.image,
-  //       this.insecticide.position.x,
-  //       this.insecticide.position.y,
-  //       this.insecticide.width,
-  //       this.insecticide.height
-  //     );
-  //   });
-  // }
+  _drawInsecticide() {
+    this.insecticide.image = new Image();
+    this.insecticide.image.src = "./img/spray.png";
+    this.ctx.drawImage(
+      this.insecticide.image,
+      this.insecticide.position.x,
+      this.insecticide.position.y,
+      this.insecticide.width,
+      this.insecticide.height
+    );
+  }
 
   _drawMosquitoes() {
-    this.mosquitoes.forEach(mosquito => {
-      if (mosquito.direction) {
-        mosquito.moveRight();
+    for (let i = 0; i < this.mosquitoes.length; i++) {
+      if (this.mosquitoes[i].direction) {
+        this.mosquitoes[i].moveRight();
       } else {
-        mosquito.moveLeft();
+        this.mosquitoes[i].moveLeft();
       }
-
-      if (mosquito.x > this.gameWidth - 30 || mosquito.x < 0) {
+      if (
+        this.mosquitoes[i].x > this.gameWidth - 30 ||
+        this.mosquitoes[i].x < 0
+      ) {
         this._changeMosquitoesDirection();
       }
       this.ctx.drawImage(
-        mosquito.image,
-        mosquito.x,
-        mosquito.y,
-        mosquito.size,
-        mosquito.size
+        this.mosquitoes[i].image,
+        this.mosquitoes[i].x,
+        this.mosquitoes[i].y,
+        this.mosquitoes[i].size,
+        this.mosquitoes[i].size
       );
-    });
+    }
+
+    // this.mosquitoes.forEach(mosquito => {
+    //   if (mosquito.direction) {
+    //     mosquito.moveRight();
+    //   } else {
+    //     mosquito.moveLeft();
+    //   }
+
+    //   if (mosquito.x > this.gameWidth - 30 || mosquito.x < 0) {
+    //     this._changeMosquitoesDirection();
+    //   }
+    //   this.ctx.drawImage(
+    //     mosquito.image,
+    //     mosquito.x,
+    //     mosquito.y,
+    //     mosquito.size,
+    //     mosquito.size
+    //   );
+    // });
   }
 
   _drawSprays() {
@@ -282,7 +304,8 @@ class Game {
         if (this.soundIsMuted === false) this.spraySound.play();
       }
       if (event.keyCode === 80) {
-        this.status = "paused";
+        // this.status = "paused";
+        this._checkStatus();
       }
     });
   }
