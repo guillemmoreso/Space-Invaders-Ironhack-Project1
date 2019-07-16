@@ -16,7 +16,7 @@ class Game {
     this.gameWon = false;
 
     this.counterVenom = 0;
-    this.intervalVenom = 40;
+    this.intervalVenom = 9940;
 
     this.soundIsMuted = false;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
@@ -272,7 +272,9 @@ class Game {
       ) {
         this.greenVenoms.splice(indexVenom, 1);
         this.insecticide.removeLife();
-        // this.gameIsOver = true;
+        if (this.insecticide.lives === 0) {
+          this.gameIsOver = true;
+        }
       }
     });
   }
