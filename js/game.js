@@ -46,6 +46,7 @@ class Game {
     this._footerButtonActions();
 
     this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
+    // this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
   }
 
   _update() {
@@ -59,6 +60,7 @@ class Game {
     this._collisionVenom();
     this._checkCollisionMosquitoesWithBottom();
     this._gameScoring();
+    // requestAnimationFrame(this._update.bind(this));
   }
 
   gameLoop() {
@@ -74,22 +76,24 @@ class Game {
 
   draw() {
     this.insecticide.draw(this.ctx);
-    // this._drawInsecticide(this.ctx);
+    // this._drawInsecticide();
     this._drawMosquitoes();
     this._drawSprays(this.ctx);
     this._drawGreenVenoms(this.ctx);
   }
 
   // _drawInsecticide() {
-  //   this.image = new Image();
-  //   this.image.src = "./img/spray.png";
-  //   this.ctx.drawImage(
-  //     this.insecticide.image,
-  //     this.insecticide.position.x,
-  //     this.insecticide.position.y,
-  //     this.insecticide.width,
-  //     this.insecticide.height
-  //   );
+  //   this.insecticide.forEach(() => {
+  //     this.image = new Image();
+  //     this.image.src = "./img/spray.png";
+  //     this.ctx.drawImage(
+  //       this.insecticide.image,
+  //       this.insecticide.position.x,
+  //       this.insecticide.position.y,
+  //       this.insecticide.width,
+  //       this.insecticide.height
+  //     );
+  //   });
   // }
 
   _drawMosquitoes() {
@@ -124,6 +128,12 @@ class Game {
     });
   }
 
+  // _drawVenom() {
+  //   this.image = new Image();
+  //   this.image.src = "./img/mosquito (1).png";
+  //   this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+  // }
+
   _drawGreenVenoms() {
     this.greenVenoms.forEach((venom, index) => {
       if (venom.y >= this.gameHeight) {
@@ -131,6 +141,7 @@ class Game {
       } else {
         venom.venomTrajectory();
         venom.draw(this.ctx);
+        // this._drawVenom();
       }
     });
   }
@@ -273,7 +284,7 @@ class Game {
     document.addEventListener("keyup", event => {
       if (event.keyCode === 32) {
         this.insecticide.attack();
-        this.spraySound.play();
+        if (this.soundIsMuted === false) this.spraySound.play();
       }
       if (event.keyCode === 80) {
         this.status = "paused";
@@ -290,13 +301,13 @@ class Game {
       if (event) this.soundIsMuted = true;
     });
 
-    // btnReset.addEventListener("click", event => {
-    //   if (event) //Mirar com es fa per posar-ho a la pagina inicial
-    // });
-
-    btnPause.addEventListener("click", event => {
-      if (event) this.soundIsMuted = true;
+    btnReset.addEventListener("click", event => {
+      if (event) console.log(startGame());
     });
+
+    // btnPause.addEventListener("click", event => {
+    //   if (event) this.soundIsMuted = true;
+    // });
   }
 
   // EXTRA FEATURES
