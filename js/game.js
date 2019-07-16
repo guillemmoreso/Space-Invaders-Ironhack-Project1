@@ -11,6 +11,7 @@ class Game {
     this.gameInterval = undefined;
     this.gameOver = false;
     this.gameWon = false;
+    this.status = undefined;
 
     this.counterVenom = 0;
     this.intervalVenom = 9960;
@@ -23,6 +24,15 @@ class Game {
   }
 
   // GAME STATUS
+  _checkStatus() {
+    switch (this.status) {
+      case "running":
+        this.update();
+        break;
+      case "paused":
+        break;
+    }
+  }
 
   _checkGameStatus() {
     if (this.gameOver === true) {

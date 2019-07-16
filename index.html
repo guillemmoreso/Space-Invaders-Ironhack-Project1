@@ -78,6 +78,16 @@
           <canvas id="gameScreen" width="1200" height="600"></canvas>
         </div>
 
+        <!--Game Screen Panels-->
+        <div id="pause-panel" style="display: none;">
+          <p>Game is paused</p>
+          <button id="continue-btn">RESUME</button>
+        </div>
+        <div id="dead-panel" style="display: none;">
+          <p>BUSTED!</p>
+          <button id="alive-btn">START OVER</button>
+        </div>
+
         <!--Game Screen Footer-->
         <div class="game-controls">
           <div class="left-controls">
@@ -101,7 +111,7 @@
       </section>
 
       <!--GameOver Screen-->
-      <section id="game-over" class="game-over">
+      <!-- <section id="game-over" class="game-over">
         <div class="img-splash">
           <audio src="./src/intro-sound.mp3" autoplay loop></audio>
           <h1>- Mosquito Invaders -</h1>
@@ -113,7 +123,7 @@
         </div>
         <button id="start" class="btn-start">START</button>
         <p class="copyright">A Game Created by: Guillem Moreso</p>
-      </section>
+      </section> -->
     </main>
 
     <!--JS Scripts-->

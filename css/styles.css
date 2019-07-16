@@ -1,4 +1,4 @@
-/*GENERAL*/
+/*** GENERAL ***/
 html {
   box-sizing: border-box;
   margin: 0;
@@ -42,7 +42,7 @@ h2 {
   text-transform: uppercase;
 }
 
-/*SPLASH*/
+/*** SPLASH ***/
 
 div.splash {
   display: flex;
@@ -116,7 +116,7 @@ div.splash {
   }
 }
 
-/*GAME*/
+/*** GAME ***/
 
 .game {
   display: flex;
@@ -170,4 +170,50 @@ canvas {
 .right-controls button {
   background: none;
   border: none;
+}
+
+/*** PANELS ***/
+
+#pause-panel {
+  margin-top: -470px;
+  margin-left: 280px;
+  border: 2px dotted white;
+  font-size: 2em;
+  width: 330px;
+  border-radius: 10px;
+  padding-left: 25px;
+  background-color: black;
+}
+
+#continue-btn {
+  background-color: black;
+  font-size: 1em;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+#dead-panel {
+  margin-top: -470px;
+  margin-left: 280px;
+  border: 2px dotted white;
+  font-size: 2em;
+  width: 330px;
+  border-radius: 10px;
+  padding-left: 25px;
+  background-color: black;
+}
+
+#dead-panel p {
+  text-align: center;
+}
+
+#alive-btn {
+  background-color: black;
+  font-size: 0.7em;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-left: 30px;
+  margin-bottom: 10px;
 }
