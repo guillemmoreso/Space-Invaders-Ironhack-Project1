@@ -1,6 +1,6 @@
 "use strict";
 class Game {
-  constructor(ctx, gameWidth, gameHeight) {
+  constructor(ctx, gameWidth, gameHeight, gameOver) {
     this.ctx = ctx;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
@@ -9,10 +9,9 @@ class Game {
     this.greenVenoms = [];
 
     this.gameInterval = undefined;
-    this.status = undefined;
 
-    // this.gameOver = false;
-    // this.gameWon = false;
+    this.gameOver = gameOver;
+    this.gameWon = false;
 
     this.counterVenom = 0;
     this.intervalVenom = 60;
@@ -27,13 +26,9 @@ class Game {
   // GAME STATUS
 
   _checkStatus() {
-    switch (this.status) {
-      case "running":
-        // this.update();
-        break;
-      case "paused":
-        window.cancelAnimationFrame(this.gameInterval);
-        break;
+    if (this.gameWon) {
+    }
+    if (this.gameOver) {
     }
   }
 
@@ -198,7 +193,6 @@ class Game {
         2500
       );
     }
-    console.log("hi");
   }
 
   // COLLISIONS
@@ -246,7 +240,8 @@ class Game {
         venom.x + venom.width <
           this.insecticide.position.x + this.insecticide.width
       ) {
-        this.insecticide.removeLife();
+        // this.insecticide.removeLife();
+        this.gameOver = true;
       }
     });
   }
