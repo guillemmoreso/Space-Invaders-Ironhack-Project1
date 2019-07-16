@@ -19,6 +19,7 @@ class Insecticide {
   }
 
   // INSECTICIDE MOVEMENTS
+
   moveLeft() {
     this.speed = -this.maxSpeed;
   }
@@ -31,6 +32,16 @@ class Insecticide {
     this.speed = 0;
   }
 
+  insecticideMovementConditions() {
+    this.position.x += this.speed;
+    if (this.position.x < 0) {
+      this.position.x = 0;
+    }
+    if (this.position.x + this.width > this.gameWidth) {
+      this.position.x = this.gameWidth - this.width;
+    }
+  }
+  //Refactor in GAME
   draw(ctx) {
     this.image = new Image();
     this.image.src = "./img/spray.png";
@@ -41,21 +52,8 @@ class Insecticide {
       this.width,
       this.height
     );
-
-    // this.ctx.fillRect(
-    // this.position.x, this.position.y, this.width, this.height;
-    // );
   }
 
-  update() {
-    this.position.x += this.speed;
-    if (this.position.x < 0) {
-      this.position.x = 0;
-    } //Avoid getting out the box on the left side
-    if (this.position.x + this.width > this.gameWidth) {
-      this.position.x = this.gameWidth - this.width;
-    } //Avoid getting out the box on the right side
-  }
   attack() {
     this.sprays.push(
       new Spray(this.position.x + this.width / 3, this.position.y, 20, 40)

@@ -15,7 +15,7 @@ class Game {
     // this.gameWon = false;
 
     this.counterVenom = 0;
-    this.intervalVenom = 9960;
+    this.intervalVenom = 60;
 
     this.soundIsMuted = false;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
@@ -29,15 +29,12 @@ class Game {
   _checkStatus() {
     switch (this.status) {
       case "running":
-        this.update();
+        // this.update();
         break;
       case "paused":
+        window.cancelAnimationFrame(this.gameInterval);
         break;
     }
-  }
-
-  _pauseGame() {
-    window.cancelAnimationFrame(this.gameInterval);
   }
 
   // START UPDATE & LOOP
@@ -50,11 +47,12 @@ class Game {
 
     this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
   }
-  update() {
+
+  _update() {
     this._checkStatus();
     this._clear();
     this.draw();
-    this.insecticide.update();
+    this.insecticide.insecticideMovementConditions();
 
     this._counterVenom();
     this._collisionSprays();
@@ -64,7 +62,7 @@ class Game {
   }
 
   gameLoop() {
-    this.update();
+    this._update();
     requestAnimationFrame(this.gameLoop.bind(this));
   }
 
@@ -120,7 +118,7 @@ class Game {
       if (spray.y < 0) {
         this.insecticide.sprays.splice(index, 1);
       } else {
-        spray.update();
+        spray.sprayTrajectory();
         spray.draw(this.ctx);
       }
     });
@@ -131,7 +129,7 @@ class Game {
       if (venom.y >= this.gameHeight) {
         this.greenVenoms.splice(index, 1);
       } else {
-        venom.update();
+        venom.venomTrajectory();
         venom.draw(this.ctx);
       }
     });
@@ -278,7 +276,7 @@ class Game {
         this.spraySound.play();
       }
       if (event.keyCode === 80) {
-        this._pauseGame();
+        this.status = "paused";
       }
     });
   }

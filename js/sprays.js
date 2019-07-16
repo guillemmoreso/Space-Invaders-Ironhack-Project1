@@ -12,11 +12,9 @@ class Spray {
     this.image = new Image();
     this.image.src = "./img/spray-gas.png";
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    // ctx.fillStyle = "#F21111";
-    // this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
-  update() {
+  sprayTrajectory() {
     this.y = this.y - 8;
   }
 }
