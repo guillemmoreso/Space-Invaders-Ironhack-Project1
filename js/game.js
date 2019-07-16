@@ -262,7 +262,7 @@ class Game {
     });
   }
   _collisionVenom() {
-    this.greenVenoms.forEach(venom => {
+    this.greenVenoms.forEach((venom, indexVenom) => {
       if (
         venom.y < this.insecticide.position.y + this.insecticide.height &&
         venom.y > this.insecticide.position.y &&
@@ -270,8 +270,9 @@ class Game {
         venom.x + venom.width <
           this.insecticide.position.x + this.insecticide.width
       ) {
-        // this.insecticide.removeLife();
-        this.gameIsOver = true;
+        this.greenVenoms.splice(indexVenom, 1);
+        this.insecticide.removeLife();
+        // this.gameIsOver = true;
       }
     });
   }
@@ -331,7 +332,7 @@ class Game {
     });
 
     btnReset.addEventListener("click", event => {
-      if (event) console.log(startGame());
+      if (event) this.gameOver();
     });
 
     btnPause.addEventListener("click", event => {

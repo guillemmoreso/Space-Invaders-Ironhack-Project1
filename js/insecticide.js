@@ -6,7 +6,7 @@ class Insecticide {
     this.height = 180;
 
     this.sprays = [];
-    this.lives = 30;
+    this.lives = 3;
     this.score = 0;
 
     this.maxSpeed = 10;
@@ -59,10 +59,10 @@ class Insecticide {
       new Spray(this.position.x + this.width / 3, this.position.y, 20, 40)
     );
   }
-  // removeLife() {
-  //   this.lives--;
-  //   document.querySelector(".live-img").remove();
-  // }
+  removeLife() {
+    this.lives--;
+    document.querySelector(".live-img").remove();
+  }
   updateScore() {
     this.score += 100;
   }

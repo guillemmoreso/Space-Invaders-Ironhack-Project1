@@ -28,8 +28,9 @@ window.onload = function() {
     game.start();
   }
   function gameOver() {
-    console.log("hola");
     gameVisible.style.display = "none";
     splashVisible.style.display = "none";
+    document.getElementById("gameOver").style = "display: block;";
+    document.getElementById("star-wars").style = "display: block;";
   }
 };
