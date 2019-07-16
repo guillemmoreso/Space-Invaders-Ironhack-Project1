@@ -77,7 +77,7 @@ div.splash {
 
 .img-splash > img {
   margin: 0 300;
-  margin-left: 50px;
+  margin-left: 100px;
   animation: blink 2.5s;
   animation-iteration-count: infinite;
 }
@@ -185,7 +185,7 @@ canvas {
   background-color: black;
 }
 
-#continue-btn {
+#btnContinue {
   background-color: black;
   font-size: 1em;
   padding: 10px 20px;
@@ -209,7 +209,7 @@ canvas {
   text-align: center;
 }
 
-#alive-btn {
+#aliveBtn {
   background-color: black;
   font-size: 0.7em;
   padding: 10px 20px;

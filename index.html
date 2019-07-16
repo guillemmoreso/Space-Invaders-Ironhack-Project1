@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Mosquito Invaders</title>
+    <title>Mosquito Space Invaders</title>
     <link
       href="https://fonts.googleapis.com/css?family=Bangers&display=swap"
       rel="stylesheet"
@@ -22,6 +22,7 @@
   </head>
   <body>
     <main class="container">
+      
       <!--Splash Screen-->
       <div id="splash" class="splash">
         <div class="img-splash">
@@ -31,7 +32,7 @@
             autoplay
             loop
           ></audio>
-          <h1>- Mosquito Invaders -</h1>
+          <h1>- Mosquito Space Invaders -</h1>
           <img
             class="splash-picture"
             src="./img/mosquito-splash.png"
@@ -44,6 +45,7 @@
 
       <!--Game Screen-->
       <section id="game" class="game">
+
         <!--Game Screen Header-->
         <div id="game-header">
           <div class="stats">
@@ -81,11 +83,11 @@
         <!--Game Screen Panels-->
         <div id="pause-panel" style="display: none;">
           <p>Game is paused</p>
-          <button id="continue-btn">RESUME</button>
+          <button id="btnContinue">RESUME</button>
         </div>
         <div id="dead-panel" style="display: none;">
-          <p>BUSTED!</p>
-          <button id="alive-btn">START OVER</button>
+          <p>GAME OVER!</p>
+          <button id="btnRestart">RESTART</button>
         </div>
 
         <!--Game Screen Footer-->
