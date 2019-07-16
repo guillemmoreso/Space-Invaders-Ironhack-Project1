@@ -6,8 +6,8 @@ class Mosquito {
     this.size = size;
 
     this.direction = true;
-    this.xSpeed = 4;
-    this.ySpeed = 4;
+    this.xSpeed = 2;
+    this.ySpeed = 2;
 
     this.image = new Image();
     this.image.src = "./img/mosquito-enemy.png";

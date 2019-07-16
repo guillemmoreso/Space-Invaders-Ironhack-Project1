@@ -28,7 +28,8 @@ window.onload = function() {
     game.start();
   }
   function gameOver() {
+    console.log("hola");
     gameVisible.style.display = "none";
-    splashVisible.style.display = "block";
+    splashVisible.style.display = "none";
   }
 };

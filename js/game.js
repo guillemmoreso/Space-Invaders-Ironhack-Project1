@@ -12,10 +12,11 @@ class Game {
     this.pause = false;
 
     this.gameOver = gameOver;
+    this.gameIsOver = false;
     this.gameWon = false;
 
     this.counterVenom = 0;
-    this.intervalVenom = 60;
+    this.intervalVenom = 40;
 
     this.soundIsMuted = false;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
@@ -27,10 +28,9 @@ class Game {
   // GAME STATUS
 
   _checkStatus() {
-    // if (this.gameWon) {
-    // }
-    // if (this.gameOver) {
-    // }
+    if (this.gameIsOver === true) {
+      this.gameOver();
+    }
   }
 
   _pauseGame() {
@@ -57,7 +57,7 @@ class Game {
 
   _update() {
     this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
-    // this._checkStatus();
+    this._checkStatus();
     this._clear();
     this.insecticide.insecticideMovementConditions();
 
@@ -230,7 +230,7 @@ class Game {
   _checkCollisionMosquitoesWithBottom() {
     this.mosquitoes.forEach(mosquito => {
       if (mosquito.y >= this.insecticide.position.y) {
-        this.gameOver = true;
+        this.gameIsOver = true;
       }
     });
   }
@@ -271,7 +271,7 @@ class Game {
           this.insecticide.position.x + this.insecticide.width
       ) {
         // this.insecticide.removeLife();
-        this.gameOver = true;
+        this.gameIsOver = true;
       }
     });
   }
@@ -334,9 +334,15 @@ class Game {
       if (event) console.log(startGame());
     });
 
-    // btnPause.addEventListener("click", event => {
-    //   if (event) this.soundIsMuted = true;
-    // });
+    btnPause.addEventListener("click", event => {
+      if (event) {
+        if (this.pause === false) {
+          this._pauseGame();
+        } else {
+          this._restartGame();
+        }
+      }
+    });
   }
 
   // EXTRA FEATURES
