@@ -54,6 +54,6 @@ class Insecticide {
     }
   }
   updateScore() {
-    this.score += 100;
+    this.score += 10;
   }
 }
