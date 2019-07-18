@@ -27,10 +27,18 @@ window.onload = function() {
     splashVisible.style.display = "none";
     document.getElementById("gameWon").style = "display: block;";
     document.getElementById("star-wars").style = "display: block;";
+    setTimeout(
+      function() {
+        document.getElementById("gameWon").style = "display: none;";
+        document.getElementById("star-wars").style = "display: none;";
+      }.bind(this),
+      16000
+    );
   }
 
   function gameOver() {
     gameVisible.style.display = "none";
     splashVisible.style.display = "none";
+    document.getElementById("gameOver").style = "display: block;";
   }
 };
