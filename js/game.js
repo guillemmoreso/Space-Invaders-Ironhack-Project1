@@ -1,6 +1,6 @@
 "use strict";
 class Game {
-  constructor(ctx, gameWidth, gameHeight, gameOver) {
+  constructor(ctx, gameWidth, gameHeight, gameOver, gameWon) {
     this.ctx = ctx;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
@@ -11,9 +11,10 @@ class Game {
     this.gameInterval = undefined;
     this.pause = false;
 
+    this.gameWon = gameWon;
     this.gameOver = gameOver;
+    this.gameIsWon = false;
     this.gameIsOver = false;
-    this.gameWon = false;
 
     this.counterVenom = 0;
     this.intervalVenom = 9940;
@@ -30,6 +31,9 @@ class Game {
   _checkStatus() {
     if (this.gameIsOver === true) {
       this.gameOver();
+    }
+    if (this.gameIsWon === true) {
+      this.gameWon();
     }
   }
 
@@ -62,6 +66,7 @@ class Game {
     this.insecticide.insecticideMovementConditions();
 
     this._counterVenom();
+    this._mosquitoArmyIsDead();
     this._collisionSprays();
     this._collisionVenom();
     this._checkCollisionMosquitoesWithBottom();
@@ -211,17 +216,14 @@ class Game {
 
   _mosquitoArmyIsDead() {
     if (this.mosquitoes.length === 0) {
-      this.gameWon = true;
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
-      this.ctx.font = "45px Comic Sans";
-      this.ctx.fillText("Game Won", this.gameWidth / 2, this.gameHeight / 2);
-      setTimeout(
-        function() {
-          this.gameWinSnores.play();
-          this.gameWinSnores = undefined;
-        }.bind(this),
-        2500
-      );
+      this.gameIsWon = true;
+      // setTimeout(
+      //   function() {
+      //     this.gameWinSnores.play();
+      //     this.gameWinSnores = undefined;
+      //   }.bind(this),
+      //   2500
+      // );
     }
   }
 

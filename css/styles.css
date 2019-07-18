@@ -172,52 +172,6 @@ canvas {
   border: none;
 }
 
-/*** PANELS ***/
-
-#pause-panel {
-  margin-top: -470px;
-  margin-left: 280px;
-  border: 2px dotted white;
-  font-size: 2em;
-  width: 330px;
-  border-radius: 10px;
-  padding-left: 25px;
-  background-color: black;
-}
-
-#btnContinue {
-  background-color: black;
-  font-size: 1em;
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin-left: 40px;
-  margin-bottom: 10px;
-}
-
-#dead-panel {
-  margin-top: -470px;
-  margin-left: 280px;
-  border: 2px dotted white;
-  font-size: 2em;
-  width: 330px;
-  border-radius: 10px;
-  padding-left: 25px;
-  background-color: black;
-}
-
-#dead-panel p {
-  text-align: center;
-}
-
-#aliveBtn {
-  background-color: black;
-  font-size: 0.7em;
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin-left: 30px;
-  margin-bottom: 10px;
-}
-
 /*** GAME OVER ***/
 
 #star-wars {
@@ -235,7 +189,7 @@ canvas {
   padding-top: 3500px;
   animation: autoscroll 1000s linear;
 }
-#gameOver:after {
+#gameWon:after {
   content: "";
   position: absolute;
   top: 0;
@@ -260,7 +214,7 @@ canvas {
   transform-origin: 50% 100%;
   transform: perspective(300px) rotateX(20deg);
 }
-#gameOver {
+#gameWon {
   color: yellow;
   background: black;
 }
