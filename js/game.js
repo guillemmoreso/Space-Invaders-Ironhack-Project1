@@ -27,10 +27,11 @@ class Game {
   // GAME STATUS
 
   _checkStatus() {
-    if (this.gameIsOver === true) {
+    if (this.gameIsOver) {
+      this.soundIsMuted = true;
       this.gameOver();
     }
-    if (this.gameIsWon === true) {
+    if (this.gameIsWon) {
       this.gameWon();
     }
   }
@@ -293,7 +294,9 @@ class Game {
     });
 
     btnReset.addEventListener("click", event => {
-      if (event) this.gameOver();
+      if (event) {
+        location.reload();
+      }
     });
 
     btnPause.addEventListener("click", event => {

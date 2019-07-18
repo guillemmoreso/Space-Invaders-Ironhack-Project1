@@ -51,6 +51,9 @@ class Insecticide {
     if (this.lives > 0) {
       this.lives--;
       document.querySelector(".live-img").remove();
+      // if (this.lives === 0) {
+      //   this.lives = 3;
+      // }
     }
   }
   updateScore() {

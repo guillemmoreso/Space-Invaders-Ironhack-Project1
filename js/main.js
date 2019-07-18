@@ -12,11 +12,15 @@ window.onload = function() {
   let btnRestart = document.getElementById("restart");
   let btnStart = document.getElementById("start");
 
+  const stats = document.getElementById("live-p");
+
   btnStart.addEventListener("click", startGame);
 
   function startGame() {
+    console.log("hi");
     gameVisible.style.display = "block";
     splashVisible.style.display = "none";
+    gameOverVisible.style = "display: none;";
 
     introSound.remove();
 
@@ -26,14 +30,14 @@ window.onload = function() {
     const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT, gameOver, gameWon);
     game.start();
   }
-  //Revisar punt per posar RestartGame
+  
   function gameWon() {
     gameVisible.style.display = "none";
     gameWonVisible.style = "display: block;";
     starWarsVisible.style = "display: block;";
     setTimeout(
       function() {
-        gameOver();
+        location.reload();
       }.bind(this),
       17000
     );
@@ -51,7 +55,15 @@ window.onload = function() {
 
   function _restartGameScreen() {
     gameOverVisible.style = "display: none;";
-
+    location.reload();
+    // for (let i = 0; i < 3; i++) {
+    //   let img = document.createElement("img");
+    //   img.src = "./img/mosquito-enemy.png";
+    //   img.width = "30";
+    //   img.height = "30";
+    //   img.className = "live-img";
+    //   stats.appendChild(img);
+    // }
     startGame();
   }
 };
