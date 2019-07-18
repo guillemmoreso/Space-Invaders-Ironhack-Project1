@@ -17,7 +17,7 @@ class Game {
     this.gameIsOver = false;
 
     this.counterVenom = 0;
-    this.intervalVenom = 40;
+    this.intervalVenom = 50;
 
     this.soundIsMuted = false;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
@@ -144,10 +144,10 @@ class Game {
   // MOSQUITOES FEATURES
 
   _createMosquitoes() {
-    for (let i = 0; i < 30; i++) {
-      let x = 20 + (i % 8) * 60;
-      let y = 20 + (i % 3) * 60;
-      this.mosquitoes.push(new Mosquito(x, y, 40));
+    for (var y = 0; y < 3; y++) {
+      for (var x = 0; x < 12; x++) {
+        this.mosquitoes.push(new Mosquito(x * 80, y * 40, 40));
+      }
     }
   }
 
