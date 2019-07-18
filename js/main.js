@@ -8,8 +8,6 @@ window.onload = function() {
 
   let btnStart = document.getElementById("start");
   btnStart.addEventListener("click", startGame);
-  let btnRestart = document.getElementById("btnRestart");
-  btnRestart.addEventListener("click", startGame);
 
   function startGame() {
     gameVisible.style.display = "block";
