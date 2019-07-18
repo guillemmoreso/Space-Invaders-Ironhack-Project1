@@ -41,18 +41,6 @@ class Insecticide {
       this.position.x = this.gameWidth - this.width;
     }
   }
-  //Refactor in GAME
-  // draw(ctx) {
-  //   this.image = new Image();
-  //   this.image.src = "./img/spray.png";
-  //   ctx.drawImage(
-  //     this.image,
-  //     this.position.x,
-  //     this.position.y,
-  //     this.width,
-  //     this.height
-  //   );
-  // }
 
   attack() {
     this.sprays.push(
@@ -60,8 +48,10 @@ class Insecticide {
     );
   }
   removeLife() {
-    this.lives--;
-    document.querySelector(".live-img").remove();
+    if (this.lives > 0) {
+      this.lives--;
+      document.querySelector(".live-img").remove();
+    }
   }
   updateScore() {
     this.score += 100;

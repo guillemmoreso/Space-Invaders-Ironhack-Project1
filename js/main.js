@@ -29,13 +29,10 @@ window.onload = function() {
   //Revisar punt per posar RestartGame
   function gameWon() {
     gameVisible.style.display = "none";
-    splashVisible.style.display = "none";
     gameWonVisible.style = "display: block;";
     starWarsVisible.style = "display: block;";
     setTimeout(
       function() {
-        gameWonVisible.style = "display: none;";
-        starWarsVisible.style = "display: none;";
         gameOver();
       }.bind(this),
       17000
@@ -43,17 +40,18 @@ window.onload = function() {
   }
 
   function gameOver() {
+    gameWonVisible.style = "display: none;";
+    starWarsVisible.style = "display: none;";
     gameVisible.style.display = "none";
     splashVisible.style.display = "none";
     gameOverVisible.style = "display: block;";
 
-    btnRestart.addEventListener("click", _restartGame);
+    btnRestart.addEventListener("click", _restartGameScreen);
   }
 
-  function _restartGame() {
+  function _restartGameScreen() {
     gameOverVisible.style = "display: none;";
-    gameWonVisible.style = "display: none;";
-    starWarsVisible.style = "display: none;";
+
     startGame();
   }
 };

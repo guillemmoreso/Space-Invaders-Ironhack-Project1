@@ -17,7 +17,7 @@ class Game {
     this.gameIsOver = false;
 
     this.counterVenom = 0;
-    this.intervalVenom = 9940;
+    this.intervalVenom = 40;
 
     this.soundIsMuted = false;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
@@ -53,8 +53,6 @@ class Game {
     this._inputHandler();
     this._footerButtonActions();
     this._update();
-
-    // this.gameInterval = window.requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   _update() {
@@ -72,11 +70,6 @@ class Game {
     this.draw();
   }
 
-  // gameLoop() {
-  //   this._update();
-  //   requestAnimationFrame(this.gameLoop.bind(this));
-  // }
-
   // CLEAR & DRAW
 
   _clear() {
@@ -84,7 +77,6 @@ class Game {
   }
 
   draw() {
-    // this.insecticide.draw(this.ctx);
     this._drawInsecticide();
     this._drawMosquitoes();
     this._drawSprays(this.ctx);
@@ -124,25 +116,6 @@ class Game {
         this.mosquitoes[i].size
       );
     }
-
-    // this.mosquitoes.forEach(mosquito => {
-    //   if (mosquito.direction) {
-    //     mosquito.moveRight();
-    //   } else {
-    //     mosquito.moveLeft();
-    //   }
-
-    //   if (mosquito.x > this.gameWidth - 30 || mosquito.x < 0) {
-    //     this._changeMosquitoesDirection();
-    //   }
-    //   this.ctx.drawImage(
-    //     mosquito.image,
-    //     mosquito.x,
-    //     mosquito.y,
-    //     mosquito.size,
-    //     mosquito.size
-    //   );
-    // });
   }
 
   _drawSprays() {
@@ -156,12 +129,6 @@ class Game {
     });
   }
 
-  // _drawVenom() {
-  //   this.image = new Image();
-  //   this.image.src = "./img/mosquito (1).png";
-  //   this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-  // }
-
   _drawGreenVenoms() {
     this.greenVenoms.forEach((venom, index) => {
       if (venom.y >= this.gameHeight) {
@@ -169,7 +136,6 @@ class Game {
       } else {
         venom.venomTrajectory();
         venom.draw(this.ctx);
-        // this._drawVenom();
       }
     });
   }
