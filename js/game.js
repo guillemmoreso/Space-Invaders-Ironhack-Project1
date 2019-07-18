@@ -204,7 +204,6 @@ class Game {
           spray.x > mosquito.x &&
           spray.x + spray.width < mosquito.x + mosquito.size
         ) {
-          //Corregir
           setTimeout(() => {
             let currentIndex = this.mosquitoes.indexOf(mosquito);
             this.mosquitoes.splice(currentIndex, 1);

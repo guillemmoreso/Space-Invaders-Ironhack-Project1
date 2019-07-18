@@ -4,20 +4,19 @@ window.onload = function() {
 
   let gameVisible = document.getElementById("game");
   let splashVisible = document.getElementById("splash");
-  let introSound = document.getElementById("intro-sound");
   let gameWonVisible = document.getElementById("gameWon");
   let starWarsVisible = document.getElementById("star-wars");
   let gameOverVisible = document.getElementById("gameOver");
 
+  let introSound = document.getElementById("intro-sound");
+  let starWarsSound = document.getElementById("starWars-sound");
+
   let btnRestart = document.getElementById("restart");
   let btnStart = document.getElementById("start");
-
-  const stats = document.getElementById("live-p");
 
   btnStart.addEventListener("click", startGame);
 
   function startGame() {
-    console.log("hi");
     gameVisible.style.display = "block";
     splashVisible.style.display = "none";
     gameOverVisible.style = "display: none;";
@@ -30,11 +29,13 @@ window.onload = function() {
     const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT, gameOver, gameWon);
     game.start();
   }
-  
+
   function gameWon() {
     gameVisible.style.display = "none";
     gameWonVisible.style = "display: block;";
     starWarsVisible.style = "display: block;";
+    starWarsSound.play();
+
     setTimeout(
       function() {
         location.reload();
@@ -56,14 +57,6 @@ window.onload = function() {
   function _restartGameScreen() {
     gameOverVisible.style = "display: none;";
     location.reload();
-    // for (let i = 0; i < 3; i++) {
-    //   let img = document.createElement("img");
-    //   img.src = "./img/mosquito-enemy.png";
-    //   img.width = "30";
-    //   img.height = "30";
-    //   img.className = "live-img";
-    //   stats.appendChild(img);
-    // }
     startGame();
   }
 };

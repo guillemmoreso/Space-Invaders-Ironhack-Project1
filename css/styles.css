@@ -142,12 +142,6 @@ div.splash {
   font-size: 1.5rem;
 }
 
-/* 
-canvas {
-  border: 10px solid white;
-  border-radius: 3%;
-} */
-
 .canvas {
   display: flex;
   flex-direction: row;
