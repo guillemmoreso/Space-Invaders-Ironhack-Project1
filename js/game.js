@@ -22,8 +22,6 @@ class Game {
     this.soundIsMuted = false;
     this.spraySound = new Audio("./src/Aerosol Can 01.wav");
     this.mosquitoAttackSound = new Audio("./src/mosquito-attack.wav");
-    this.mosquitoPain = new Audio("./src/mosquitoPain.wav");
-    this.gameWinSnores = new Audio("./src/snores.wav");
   }
 
   // GAME STATUS
@@ -217,13 +215,6 @@ class Game {
   _mosquitoArmyIsDead() {
     if (this.mosquitoes.length === 0) {
       this.gameIsWon = true;
-      // setTimeout(
-      //   function() {
-      //     this.gameWinSnores.play();
-      //     this.gameWinSnores = undefined;
-      //   }.bind(this),
-      //   2500
-      // );
     }
   }
 

@@ -5,8 +5,13 @@ window.onload = function() {
   let gameVisible = document.getElementById("game");
   let splashVisible = document.getElementById("splash");
   let introSound = document.getElementById("intro-sound");
+  let gameWonVisible = document.getElementById("gameWon");
+  let starWarsVisible = document.getElementById("star-wars");
+  let gameOverVisible = document.getElementById("gameOver");
 
+  let btnRestart = document.getElementById("restart");
   let btnStart = document.getElementById("start");
+
   btnStart.addEventListener("click", startGame);
 
   function startGame() {
@@ -21,24 +26,34 @@ window.onload = function() {
     const game = new Game(ctx, GAME_WIDTH, GAME_HEIGHT, gameOver, gameWon);
     game.start();
   }
-
+  //Revisar punt per posar RestartGame
   function gameWon() {
     gameVisible.style.display = "none";
     splashVisible.style.display = "none";
-    document.getElementById("gameWon").style = "display: block;";
-    document.getElementById("star-wars").style = "display: block;";
+    gameWonVisible.style = "display: block;";
+    starWarsVisible.style = "display: block;";
     setTimeout(
       function() {
-        document.getElementById("gameWon").style = "display: none;";
-        document.getElementById("star-wars").style = "display: none;";
+        gameWonVisible.style = "display: none;";
+        starWarsVisible.style = "display: none;";
+        gameOver();
       }.bind(this),
-      16000
+      17000
     );
   }
 
   function gameOver() {
     gameVisible.style.display = "none";
     splashVisible.style.display = "none";
-    document.getElementById("gameOver").style = "display: block;";
+    gameOverVisible.style = "display: block;";
+
+    btnRestart.addEventListener("click", _restartGame);
+  }
+
+  function _restartGame() {
+    gameOverVisible.style = "display: none;";
+    gameWonVisible.style = "display: none;";
+    starWarsVisible.style = "display: none;";
+    startGame();
   }
 };
